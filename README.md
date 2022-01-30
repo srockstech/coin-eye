@@ -1,3 +1,3 @@
-# Crypto Eye
+# CoinEye
 
 A crypto ticker app.

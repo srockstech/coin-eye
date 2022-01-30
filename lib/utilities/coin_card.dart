@@ -38,7 +38,7 @@ class CoinCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    '$rate',
+                    '\$$rate',
                     textAlign: TextAlign.center,
                     style: kRateTextStyle,
                   ),
