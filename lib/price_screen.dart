@@ -1,48 +1,129 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'utilities/coin_card.dart';
+import 'utilities/constants.dart';
 
 class PriceScreen extends StatefulWidget {
   @override
   _PriceScreenState createState() => _PriceScreenState();
 }
 
-class _PriceScreenState extends State<PriceScreen> {
+class _PriceScreenState extends State<PriceScreen>
+    with TickerProviderStateMixin {
+  TabController _tabController;
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('🤑 Coin Ticker'),
+        toolbarHeight: 60,
+        elevation: 5,
+        shadowColor: Color(0xFF000000),
+        backgroundColor: Colors.yellow.shade600,
+        title: Row(
+          children: [
+            Text(
+              'coin',
+              style: kLogoFirstWordTextStyle,
+            ),
+            Text(
+              'eye',
+              style: kLogoSecondWordTextStyle,
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.attach_money_rounded,
+              size: 30,
+              color: Colors.black,
+            ),
+          )
+        ],
+        bottom: TabBar(
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          indicatorColor: Colors.green.shade600,
+          controller: _tabController,
+          tabs: [
+            Tab(
+              child: Text(
+                'All Coins',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+            Tab(
+              child: Text(
+                'My Watchlist',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          ],
+        ),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
-              color: Colors.lightBlueAccent,
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
-                  '1 BTC = ? USD',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
+          Column(
+            children: [
+              Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Text(
+                            'COIN NAME',
+                            style: kFieldNameTextStyle,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          'PRICE',
+                          textAlign: TextAlign.center,
+                          style: kFieldNameTextStyle,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                child: SizedBox(
+                  height: 0,
+                  child: Divider(
+                    // height: ,
+                    thickness: 1,
+                  ),
+                ),
+              ),
+            ],
           ),
-          Container(
-            height: 150.0,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(bottom: 30.0),
-            color: Colors.lightBlue,
-            child: null,
+          CoinCard(
+            coinName: 'Bitcoin',
+            coinCode: 'BTC',
+            rate: null,
+          ),
+          CoinCard(
+            coinName: 'Ethereum',
+            coinCode: 'ETH',
+            rate: null,
+          ),
+          CoinCard(
+            coinName: 'Litecoin',
+            coinCode: 'LTC',
+            rate: null,
           ),
         ],
       ),
