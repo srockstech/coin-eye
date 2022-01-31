@@ -23,7 +23,7 @@ const kCoinNameTextStyle = TextStyle(
 
 const kLogoFirstWordTextStyle = TextStyle(
   height: 1,
-  color: Colors.black,
+  color: Colors.white,
   fontWeight: FontWeight.w900,
 // fontFamily: 'Neonderthaw',
   fontSize: 30,
@@ -32,7 +32,14 @@ const kLogoFirstWordTextStyle = TextStyle(
 
 const kLogoSecondWordTextStyle = TextStyle(
   height: 1,
-  color: Color(0xFF2E7D32),
+  color: Color(0xFF2BFFF1),
+  shadows: <Shadow>[
+    Shadow(
+      color: Color(0xFF2BFFF1),
+      offset: Offset(0, 0),
+      blurRadius: 5,
+    ),
+  ],
   fontWeight: FontWeight.w900,
   // fontFamily: 'Neonderthaw',
   fontSize: 30,

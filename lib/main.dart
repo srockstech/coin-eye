@@ -11,6 +11,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light().copyWith(
         primaryColor: Colors.black,
         scaffoldBackgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          secondary: Color(0xFF2BFFF1), // Your accent color
+        ),
+        // androidOverscrollIndicator: AndroidOverscrollIndicator.glow,
       ),
       home: PriceScreen(),
     );
