@@ -5,9 +5,12 @@ class CoinCard extends StatelessWidget {
   final String coinName;
   final String coinCode;
   final double rate;
-
+  final String selectedCurrencySymbol;
   CoinCard(
-      {@required this.coinName, @required this.coinCode, @required this.rate});
+      {@required this.coinName,
+      @required this.coinCode,
+      @required this.rate,
+      @required this.selectedCurrencySymbol});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,7 @@ class CoinCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    '\$$rate',
+                    '$selectedCurrencySymbol$rate',
                     textAlign: TextAlign.center,
                     style: kRateTextStyle,
                   ),
