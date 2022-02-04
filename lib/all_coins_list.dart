@@ -3,8 +3,8 @@ import 'utilities/constants.dart';
 import 'utilities/coin_card.dart';
 
 class AllCoinsList extends StatelessWidget {
-  final String selectedCurrencySymbol;
-  AllCoinsList(this.selectedCurrencySymbol);
+  final String selectedCurrencyCode;
+  AllCoinsList(this.selectedCurrencyCode);
 
   @override
   Widget build(BuildContext context) {
@@ -53,20 +53,20 @@ class AllCoinsList extends StatelessWidget {
         CoinCard(
           coinName: 'Bitcoin',
           coinCode: 'BTC',
-          rate: null,
-          selectedCurrencySymbol: selectedCurrencySymbol,
+          rate: 269578.77,
+          selectedCurrencyCode: selectedCurrencyCode,
         ),
         CoinCard(
           coinName: 'Ethereum',
           coinCode: 'ETH',
-          rate: null,
-          selectedCurrencySymbol: selectedCurrencySymbol,
+          rate: 36363.77,
+          selectedCurrencyCode: selectedCurrencyCode,
         ),
         CoinCard(
           coinName: 'Litecoin',
           coinCode: 'LTC',
-          rate: null,
-          selectedCurrencySymbol: selectedCurrencySymbol,
+          rate: 12244.77,
+          selectedCurrencyCode: selectedCurrencyCode,
         ),
       ],
     );

@@ -6,7 +6,7 @@ const kFieldNameTextStyle = TextStyle(
 );
 
 const kRateTextStyle = TextStyle(
-  fontSize: 15.0,
+  fontSize: 12.0,
   color: Colors.black,
 );
 

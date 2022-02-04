@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'all_coins_list.dart';
 import 'utilities/constants.dart';
-import 'utilities/currency_icon.dart';
+import 'coin_data.dart';
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -18,8 +18,21 @@ class _PriceScreenState extends State<PriceScreen>
     _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
   }
 
-  IconData selectedCurrencyIcon = Icons.attach_money_rounded;
   String selectedCurrencySymbol = '\$';
+  String selectedCurrencyCode = 'USD';
+  List<PopupMenuItem<String>> getPopupMenuItemsList() {
+    List<PopupMenuItem<String>> popupMenuItems = [];
+    currenciesList.forEach((key, value) {
+      PopupMenuItem<String> popupMenuItem = PopupMenuItem(
+        child: Text('$value $key'),
+        value: key,
+      );
+      popupMenuItems.add(popupMenuItem);
+    });
+
+    return popupMenuItems;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,33 +56,22 @@ class _PriceScreenState extends State<PriceScreen>
         actions: [
           PopupMenuButton<String>(
             itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem(
-                  child: Text('\$ USD'),
-                  value: '\$',
-                ),
-                PopupMenuItem(
-                  child: Text('€ EUR'),
-                  value: '€',
-                ),
-                PopupMenuItem(
-                  child: Text('£ GBP'),
-                  value: '£',
-                ),
-              ];
+              return getPopupMenuItemsList();
             },
-            onSelected: (value) {
+            onSelected: (key) {
               setState(() {
-                selectedCurrencyIcon = CurrencyIcon().getIcon(value);
-                selectedCurrencySymbol = value;
+                selectedCurrencySymbol = currenciesList[key];
+                selectedCurrencyCode = key;
               });
             },
-            icon: Icon(
-              selectedCurrencyIcon,
-              size: 30,
-              color: Colors.white,
+            icon: Text(
+              selectedCurrencySymbol,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
-          )
+          ),
+          SizedBox(
+            width: 8,
+          ),
         ],
         bottom: TabBar(
           overlayColor: MaterialStateProperty.all(Colors.transparent),
@@ -94,7 +96,7 @@ class _PriceScreenState extends State<PriceScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
-          AllCoinsList(selectedCurrencySymbol),
+          AllCoinsList(selectedCurrencyCode),
           Center(
             child: Container(
               margin: EdgeInsets.all(50),
