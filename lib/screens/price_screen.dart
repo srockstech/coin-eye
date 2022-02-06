@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'all_coins_list.dart';
-import 'utilities/constants.dart';
-import 'coin_data.dart';
+import '../components/all_coins_list.dart';
+import '../utilities/constants.dart';
+import '../services/coin_data.dart';
+import 'package:coin_eye/services/loading.dart';
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -12,14 +13,9 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen>
     with TickerProviderStateMixin {
   TabController _tabController;
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
-  }
-
   String selectedCurrencySymbol = '\$';
   String selectedCurrencyCode = 'USD';
+
   List<PopupMenuItem<String>> getPopupMenuItemsList() {
     List<PopupMenuItem<String>> popupMenuItems = [];
     currenciesList.forEach((key, value) {
@@ -29,8 +25,16 @@ class _PriceScreenState extends State<PriceScreen>
       );
       popupMenuItems.add(popupMenuItem);
     });
-
     return popupMenuItems;
+  }
+
+  Widget loadingSpinner;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+    loadingSpinner = LoadingSpinner(selectedCurrency: selectedCurrencyCode);
   }
 
   @override
@@ -62,6 +66,8 @@ class _PriceScreenState extends State<PriceScreen>
               setState(() {
                 selectedCurrencySymbol = currenciesList[key];
                 selectedCurrencyCode = key;
+                loadingSpinner =
+                    LoadingSpinner(selectedCurrency: selectedCurrencyCode);
               });
             },
             icon: Text(
@@ -96,7 +102,7 @@ class _PriceScreenState extends State<PriceScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
-          AllCoinsList(selectedCurrencyCode),
+          loadingSpinner,
           Center(
             child: Container(
               margin: EdgeInsets.all(50),

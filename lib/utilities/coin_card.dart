@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import '../services/networking.dart';
 
 class CoinCard extends StatelessWidget {
   final String coinName;
   final String coinCode;
-  final double rate;
+  final String rate;
   final String selectedCurrencyCode;
   CoinCard(
       {@required this.coinName,

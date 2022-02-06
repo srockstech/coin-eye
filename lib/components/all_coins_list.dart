@@ -1,10 +1,46 @@
 import 'package:flutter/material.dart';
-import 'utilities/constants.dart';
-import 'utilities/coin_card.dart';
+import '../utilities/constants.dart';
+import '../utilities/coin_card.dart';
+import '../services/coin_data.dart';
 
-class AllCoinsList extends StatelessWidget {
-  final String selectedCurrencyCode;
-  AllCoinsList(this.selectedCurrencyCode);
+class AllCoinsList extends StatefulWidget {
+  final List<dynamic> coinsDataList;
+  AllCoinsList(this.coinsDataList);
+
+  @override
+  _AllCoinsListState createState() => _AllCoinsListState();
+}
+
+class _AllCoinsListState extends State<AllCoinsList> {
+  List<dynamic> coinsData;
+
+  void updateCoinPrice(currentCoinData) {
+    setState(() {
+      coinsData = currentCoinData;
+    });
+  }
+
+  List<Widget> coinCards() {
+    Widget coinCard;
+    List<Widget> coinCardsList = [];
+    for (var coinData in coinsData) {
+      coinCard = CoinCard(
+        coinName: coinName[coinData['asset_id_base']],
+        coinCode: coinData['asset_id_base'],
+        rate: coinData['rate'].toStringAsFixed(3),
+        selectedCurrencyCode: coinData['asset_id_quote'],
+      );
+      coinCardsList.add(coinCard);
+    }
+    return coinCardsList;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // print((widget.coinsDataList)[0]['rate']);
+    updateCoinPrice(widget.coinsDataList);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,23 +86,8 @@ class AllCoinsList extends StatelessWidget {
             ),
           ],
         ),
-        CoinCard(
-          coinName: 'Bitcoin',
-          coinCode: 'BTC',
-          rate: 269578.77,
-          selectedCurrencyCode: selectedCurrencyCode,
-        ),
-        CoinCard(
-          coinName: 'Ethereum',
-          coinCode: 'ETH',
-          rate: 36363.77,
-          selectedCurrencyCode: selectedCurrencyCode,
-        ),
-        CoinCard(
-          coinName: 'Litecoin',
-          coinCode: 'LTC',
-          rate: 12244.77,
-          selectedCurrencyCode: selectedCurrencyCode,
+        Column(
+          children: coinCards(),
         ),
       ],
     );
