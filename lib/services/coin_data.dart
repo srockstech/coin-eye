@@ -28,12 +28,18 @@ const Map<String, String> currenciesList = {
 
 const Map<String, String> coinName = {
   'BTC': 'Bitcoin',
+  'SOL': 'Solana',
+  'YFI': 'yearn.finance',
   'ETH': 'Ethereum',
+  'MKR': 'Maker',
+  'BNB': 'Binance Coin',
+  'BCH': 'Bitcoin Cash',
   'LTC': 'Litecoin',
+  'XRP': 'Ripple',
 };
 
-const coinApiURL = 'https://rest.coinapi.io/v1/exchangerate';
-const coinApiKey = '2A44A8C6-035F-4861-BD9A-8BF5AA1BA23C';
+const coinApiURL = 'https://api.nomics.com/v1/currencies/ticker';
+const coinApiKey = '2789cade360e8e97437724594cd2c98a49839328';
 
 class CoinData {
   final String coinCode;
@@ -42,8 +48,8 @@ class CoinData {
   CoinData({@required this.coinCode, @required this.currency});
 
   Future<dynamic> getCoinData() async {
-    NetworkHelper networkHelper =
-        NetworkHelper('$coinApiURL/$coinCode/$currency?apikey=$coinApiKey');
+    NetworkHelper networkHelper = NetworkHelper(
+        '$coinApiURL?key=$coinApiKey&ids=$coinCode&convert=$currency');
     var coinData = await networkHelper.getData();
     return coinData;
   }

@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import '../services/networking.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CoinCard extends StatelessWidget {
   final String coinName;
   final String coinCode;
   final String rate;
   final String selectedCurrencyCode;
-  CoinCard(
-      {@required this.coinName,
-      @required this.coinCode,
-      @required this.rate,
-      @required this.selectedCurrencyCode});
+  final String logoUrl;
+  CoinCard({
+    @required this.coinName,
+    @required this.coinCode,
+    @required this.rate,
+    @required this.selectedCurrencyCode,
+    @required this.logoUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +24,23 @@ class CoinCard extends StatelessWidget {
         Container(
           color: Colors.white,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+            padding: EdgeInsets.symmetric(vertical: 11.0, horizontal: 20.0),
             child: Row(
               children: [
+                Container(
+                  child: SvgPicture.network(
+                    logoUrl,
+                  ),
+                  height: 35,
+                  width: 35,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+                SizedBox(
+                  width: 6,
+                ),
                 Expanded(
                   child: Container(
                     child: Column(
@@ -41,10 +59,19 @@ class CoinCard extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: Text(
-                    '$rate $selectedCurrencyCode',
-                    textAlign: TextAlign.center,
-                    style: kRateTextStyle,
+                  child: Column(
+                    children: [
+                      Text(
+                        '$rate',
+                        textAlign: TextAlign.center,
+                        style: kRateTextStyle,
+                      ),
+                      Text(
+                        '$selectedCurrencyCode',
+                        textAlign: TextAlign.center,
+                        style: kCurrencyCodeTextStyle,
+                      ),
+                    ],
                   ),
                 ),
               ],

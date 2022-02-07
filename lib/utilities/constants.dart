@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
 
 const kFieldNameTextStyle = TextStyle(
-  fontSize: 11.0,
-  color: Colors.grey,
+  fontSize: 10.0,
+  fontWeight: FontWeight.w300,
 );
 
 const kRateTextStyle = TextStyle(
   fontSize: 12.0,
+  fontWeight: FontWeight.w500,
+  color: Colors.black,
+);
+
+const kCurrencyCodeTextStyle = TextStyle(
+  fontSize: 9.0,
+  fontWeight: FontWeight.w300,
   color: Colors.black,
 );
 
 const kCoinCodeTextStyle = TextStyle(
-  fontSize: 12.0,
-  color: Colors.grey,
+  fontSize: 10.0,
+  fontWeight: FontWeight.w300,
 );
 
 const kCoinNameTextStyle = TextStyle(
   fontWeight: FontWeight.w700,
-  fontSize: 15.0,
+  fontSize: 13.0,
   color: Colors.black,
 );
 

@@ -22,7 +22,7 @@ class _LoadingSpinnerState extends State<LoadingSpinner> {
       coinsDataList.add(coinData);
     }
     setState(() {
-      allCoinsTab = AllCoinsList(coinsDataList);
+      allCoinsTab = AllCoinsList(coinsDataList, widget.selectedCurrency);
     });
   }
 
