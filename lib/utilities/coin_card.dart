@@ -4,6 +4,7 @@ import '../services/networking.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CoinCard extends StatelessWidget {
+  var logo;
   final String coinName;
   final String coinCode;
   final String rate;
@@ -28,18 +29,14 @@ class CoinCard extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  child: SvgPicture.network(
+                  child: Image.network(
                     logoUrl,
                   ),
                   height: 35,
                   width: 35,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
                 ),
                 SizedBox(
-                  width: 6,
+                  width: 14,
                 ),
                 Expanded(
                   child: Container(

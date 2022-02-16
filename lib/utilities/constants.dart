@@ -8,7 +8,6 @@ const kFieldNameTextStyle = TextStyle(
 const kRateTextStyle = TextStyle(
   fontSize: 12.0,
   fontWeight: FontWeight.w500,
-  color: Colors.black,
 );
 
 const kCurrencyCodeTextStyle = TextStyle(

@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../components/all_coins_list.dart';
 import '../utilities/constants.dart';
 import '../services/coin_data.dart';
-import 'package:coin_eye/services/loading.dart';
+import 'package:coin_eye/utilities/coin_card.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:coin_eye/utilities/field_banner.dart';
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -15,6 +16,10 @@ class _PriceScreenState extends State<PriceScreen>
   TabController _tabController;
   String selectedCurrencySymbol = '\$';
   String selectedCurrencyCode = 'USD';
+  Widget allCoinsTab;
+  List<dynamic> coinsDataList;
+  CoinData coinData;
+  // bool updatePrice = false;
 
   List<PopupMenuItem<String>> getPopupMenuItemsList() {
     List<PopupMenuItem<String>> popupMenuItems = [];
@@ -28,13 +33,54 @@ class _PriceScreenState extends State<PriceScreen>
     return popupMenuItems;
   }
 
-  Widget loadingSpinner;
+  void initialUI() async {
+    coinData = CoinData(currency: selectedCurrencyCode);
+    coinsDataList = await coinData.getCoinsMetaData();
+    setState(() {
+      allCoinsTab = Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          FieldBanner(),
+          Flexible(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemBuilder: (listViewContext, index) {
+                var priceInString;
+                // double price; //todo: get price
+                // if (price < 1) {
+                //   priceInString = price.toStringAsFixed(6);
+                // } else {
+                //   priceInString = price.toStringAsFixed(2);
+                // }
+                return CoinCard(
+                  coinName: coinData.getCoinsName().values.toList()[index],
+                  coinCode: coinData.getCoinsName().keys.toList()[index],
+                  rate: '817248',
+                  selectedCurrencyCode: selectedCurrencyCode,
+                  logoUrl: coinsDataList[index]['data']
+                      [coinData.getCoinsName().keys.toList()[index]][0]['logo'],
+                );
+              },
+              itemCount: coinsDataList.length,
+            ),
+          ),
+        ],
+      );
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
-    loadingSpinner = LoadingSpinner(selectedCurrency: selectedCurrencyCode);
+    allCoinsTab = Center(
+      child: SpinKitRing(
+        color: Colors.black,
+        size: 50,
+        lineWidth: 4,
+      ),
+    );
+    initialUI();
   }
 
   @override
@@ -63,12 +109,9 @@ class _PriceScreenState extends State<PriceScreen>
               return getPopupMenuItemsList();
             },
             onSelected: (key) {
-              setState(() {
-                selectedCurrencySymbol = currenciesList[key];
-                selectedCurrencyCode = key;
-                loadingSpinner =
-                    LoadingSpinner(selectedCurrency: selectedCurrencyCode);
-              });
+              selectedCurrencySymbol = currenciesList[key];
+              selectedCurrencyCode = key;
+              initialUI();
             },
             icon: Text(
               selectedCurrencySymbol,
@@ -102,7 +145,7 @@ class _PriceScreenState extends State<PriceScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
-          loadingSpinner,
+          allCoinsTab,
           Center(
             child: Container(
               margin: EdgeInsets.all(50),
