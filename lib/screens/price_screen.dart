@@ -17,6 +17,8 @@ class _PriceScreenState extends State<PriceScreen>
   String selectedCurrencySymbol = '\$';
   String selectedCurrencyCode = 'USD';
   Widget allCoinsTab;
+  Widget selectedCurrencyIcon;
+  Widget refreshButton;
   var coinsData;
   CoinData coinData;
   // bool updatePrice = false;
@@ -33,9 +35,9 @@ class _PriceScreenState extends State<PriceScreen>
     return popupMenuItems;
   }
 
-  void initialUI() async {
+  void updateUI() async {
     coinData = CoinData(currency: selectedCurrencyCode);
-    coinsData = await coinData.getCoinsMetaData();
+    coinsData = await coinData.fetchCoinsMetaData();
     setState(() {
       allCoinsTab = Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -46,31 +48,50 @@ class _PriceScreenState extends State<PriceScreen>
               shrinkWrap: true,
               itemBuilder: (listViewContext, index) {
                 var priceInString;
-                // double price; //todo: get price
-                // if (price < 1) {
-                //   priceInString = price.toStringAsFixed(6);
-                // } else {
-                //   priceInString = price.toStringAsFixed(2);
-                // }data.BNB[0].logo data.BTC[0].logo
+                double price = coinData.getCoinsPrice().values.toList()[index];
+                if (price < 1) {
+                  priceInString = price.toStringAsFixed(6);
+                } else {
+                  priceInString = price.toStringAsFixed(2);
+                }
 
                 return CoinCard(
                   coinName: coinData.getCoinsName().values.toList()[index],
                   coinCode: coinData.getCoinsName().keys.toList()[index],
-                  rate: '817248',
+                  rate: priceInString,
                   selectedCurrencyCode: selectedCurrencyCode,
-                  logoUrl:
-                      // 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
-                      coinsData['data'][coinData
-                          .getCoinsName()
-                          .keys
-                          .toList()[index]
-                          .toUpperCase()][0]['logo'],
+                  logoUrl: coinsData['data'][coinData
+                      .getCoinsName()
+                      .keys
+                      .toList()[index]
+                      .toUpperCase()][0]['logo'],
                 );
               },
               itemCount: coinData.getCoinsName().length,
             ),
           ),
         ],
+      );
+      selectedCurrencyIcon = Text(
+        selectedCurrencySymbol,
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+      );
+      refreshButton = GestureDetector(
+        onTap: () {
+          setState(() {
+            refreshButton = SpinKitRing(
+              color: Colors.white,
+              size: 20,
+              lineWidth: 2,
+            );
+          });
+          updateUI();
+        },
+        child: Icon(
+          Icons.refresh,
+          size: 25,
+          color: Colors.white,
+        ),
       );
     });
   }
@@ -82,11 +103,32 @@ class _PriceScreenState extends State<PriceScreen>
     allCoinsTab = Center(
       child: SpinKitRing(
         color: Colors.black,
-        size: 50,
+        size: 30,
         lineWidth: 4,
       ),
     );
-    initialUI();
+    selectedCurrencyIcon = Text(
+      selectedCurrencySymbol,
+      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+    );
+    refreshButton = GestureDetector(
+      onTap: () {
+        setState(() {
+          refreshButton = SpinKitRing(
+            color: Colors.white,
+            size: 20,
+            lineWidth: 2,
+          );
+        });
+        updateUI();
+      },
+      child: Icon(
+        Icons.refresh,
+        size: 25,
+        color: Colors.white,
+      ),
+    );
+    updateUI();
   }
 
   @override
@@ -110,6 +152,7 @@ class _PriceScreenState extends State<PriceScreen>
           ],
         ),
         actions: [
+          refreshButton,
           PopupMenuButton<String>(
             itemBuilder: (BuildContext context) {
               return getPopupMenuItemsList();
@@ -117,12 +160,16 @@ class _PriceScreenState extends State<PriceScreen>
             onSelected: (key) {
               selectedCurrencySymbol = currenciesList[key];
               selectedCurrencyCode = key;
-              initialUI();
+              setState(() {
+                selectedCurrencyIcon = SpinKitRing(
+                  color: Colors.white,
+                  size: 20,
+                  lineWidth: 2,
+                );
+              });
+              updateUI();
             },
-            icon: Text(
-              selectedCurrencySymbol,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-            ),
+            icon: selectedCurrencyIcon,
           ),
           SizedBox(
             width: 8,
