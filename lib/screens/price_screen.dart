@@ -17,7 +17,7 @@ class _PriceScreenState extends State<PriceScreen>
   String selectedCurrencySymbol = '\$';
   String selectedCurrencyCode = 'USD';
   Widget allCoinsTab;
-  List<dynamic> coinsDataList;
+  var coinsData;
   CoinData coinData;
   // bool updatePrice = false;
 
@@ -35,7 +35,7 @@ class _PriceScreenState extends State<PriceScreen>
 
   void initialUI() async {
     coinData = CoinData(currency: selectedCurrencyCode);
-    coinsDataList = await coinData.getCoinsMetaData();
+    coinsData = await coinData.getCoinsMetaData();
     setState(() {
       allCoinsTab = Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -51,17 +51,23 @@ class _PriceScreenState extends State<PriceScreen>
                 //   priceInString = price.toStringAsFixed(6);
                 // } else {
                 //   priceInString = price.toStringAsFixed(2);
-                // }
+                // }data.BNB[0].logo data.BTC[0].logo
+
                 return CoinCard(
                   coinName: coinData.getCoinsName().values.toList()[index],
                   coinCode: coinData.getCoinsName().keys.toList()[index],
                   rate: '817248',
                   selectedCurrencyCode: selectedCurrencyCode,
-                  logoUrl: coinsDataList[index]['data']
-                      [coinData.getCoinsName().keys.toList()[index]][0]['logo'],
+                  logoUrl:
+                      // 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
+                      coinsData['data'][coinData
+                          .getCoinsName()
+                          .keys
+                          .toList()[index]
+                          .toUpperCase()][0]['logo'],
                 );
               },
-              itemCount: coinsDataList.length,
+              itemCount: coinData.getCoinsName().length,
             ),
           ),
         ],

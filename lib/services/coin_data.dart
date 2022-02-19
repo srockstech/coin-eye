@@ -33,7 +33,7 @@ const cmcApiKey = '15e33201-d615-4852-8a10-1523da86bc7e';
 const cmcLatestListingsApiURL =
     'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
 
-const noOfCoins = 20;
+const noOfCoins = 500;
 
 class CoinData {
   final String currency;
@@ -61,21 +61,36 @@ class CoinData {
     NetworkHelper networkHelper = NetworkHelper(
         '$cmcLatestListingsApiURL?CMC_PRO_API_KEY=$cmcApiKey&convert=$currency&limit=$noOfCoins');
     var coinData = await networkHelper.getData();
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 500; i++) {
       coins[coinData['data'][i]['symbol']] = coinData['data'][i]['name'];
     }
     return coins;
   }
 
-  Future<List<dynamic>> getCoinsMetaData() async {
+  Future<dynamic> getCoinsMetaData() async {
     _coinsName = await getAllCoinsListings();
-    List<dynamic> coinsDataList = [];
-    for (var coinCode in _coinsName.keys) {
-      NetworkHelper networkHelper = NetworkHelper(
-          '$cmcMetaDataApiURL?CMC_PRO_API_KEY=$cmcApiKey&symbol=$coinCode&aux=logo');
-      var coinData = await networkHelper.getData();
-      coinsDataList.add(coinData);
+    String coinCodeList = '';
+    for (var coinName in _coinsName.keys) {
+      if (coinName == 'FCT,FCT2') {
+        if (coinName == _coinsName.keys.last)
+          coinCodeList += 'FCT';
+        else {
+          coinCodeList += 'FCT,';
+        }
+        continue;
+      }
+      if (coinName == _coinsName.keys.last) {
+        coinCodeList += coinName;
+      } else {
+        coinCodeList += coinName;
+        coinCodeList += ',';
+      }
     }
-    return coinsDataList;
+
+    NetworkHelper networkHelper = NetworkHelper(
+        '$cmcMetaDataApiURL?CMC_PRO_API_KEY=$cmcApiKey&symbol=$coinCodeList&aux=logo');
+    var coinsData = await networkHelper.getData();
+
+    return coinsData;
   }
 }
