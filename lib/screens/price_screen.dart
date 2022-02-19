@@ -59,6 +59,7 @@ class _PriceScreenState extends State<PriceScreen>
                   coinName: coinData.getCoinsName().values.toList()[index],
                   coinCode: coinData.getCoinsName().keys.toList()[index],
                   rate: priceInString,
+                  percent24HChange: '2.4%',
                   selectedCurrencyCode: selectedCurrencyCode,
                   logoUrl: coinsData['data'][coinData
                       .getCoinsName()
