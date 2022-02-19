@@ -13,7 +13,7 @@ class FieldBanner extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  flex: 2,
+                  flex: 30,
                   child: Container(
                     child: Text(
                       'COIN NAME',
@@ -22,18 +22,15 @@ class FieldBanner extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 4),
-                    child: Text(
-                      'PRICE',
-                      textAlign: TextAlign.center,
-                      style: kFieldNameTextStyle,
-                    ),
+                  flex: 9,
+                  child: Text(
+                    'PRICE',
+                    textAlign: TextAlign.center,
+                    style: kFieldNameTextStyle,
                   ),
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 25,
                   child: Text(
                     '24H CHANGE',
                     textAlign: TextAlign.center,
