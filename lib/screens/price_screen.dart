@@ -47,7 +47,7 @@ class _PriceScreenState extends State<PriceScreen>
             child: ListView.builder(
               shrinkWrap: true,
               itemBuilder: (listViewContext, index) {
-                var priceInString;
+                var priceInString, coins24HChangeInString;
                 double price = coinData.getCoinsPrice().values.toList()[index];
                 if (price < 1) {
                   priceInString = price.toStringAsFixed(6);
@@ -55,11 +55,15 @@ class _PriceScreenState extends State<PriceScreen>
                   priceInString = price.toStringAsFixed(2);
                 }
 
+                double coin24HChange =
+                    coinData.getCoins24Change().values.toList()[index];
+                coins24HChangeInString = coin24HChange.toStringAsFixed(2);
+
                 return CoinCard(
                   coinName: coinData.getCoinsName().values.toList()[index],
                   coinCode: coinData.getCoinsName().keys.toList()[index],
                   rate: priceInString,
-                  percent24HChange: '2.4%',
+                  percent24HChange: coins24HChangeInString,
                   selectedCurrencyCode: selectedCurrencyCode,
                   logoUrl: coinsData['data'][coinData
                       .getCoinsName()

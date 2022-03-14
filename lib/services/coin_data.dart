@@ -45,6 +45,10 @@ class CoinData {
     // eg. 'BTC': '2990023.34213624',
   };
 
+  Map<String, double> _coins24HChange = {
+    // eg. 'BTC': '2.4',
+  };
+
   CoinData({@required this.currency});
 
   Map<String, String> getCoinsName() {
@@ -55,11 +59,15 @@ class CoinData {
     return _coinsPrice;
   }
 
+  Map<String, double> getCoins24Change() {
+    return _coins24HChange;
+  }
+
   void setCoinsPrice(newCoinsPrice) {
     _coinsPrice = newCoinsPrice;
   }
 
-  Future<Map<String, double>> fetchCoinPrices() async {
+  Future<Map<String, double>> fetchCoinsPrices() async {
     Map<String, double> priceList = {};
     NetworkHelper networkHelper = NetworkHelper(
         '$cmcLatestListingsApiURL?CMC_PRO_API_KEY=$cmcApiKey&convert=$currency&limit=$noOfCoins');
@@ -69,8 +77,23 @@ class CoinData {
       priceList[coin] = coinData['data'][i]['quote'][currency]['price'];
       i++;
     }
-
     return priceList;
+  }
+
+  Future<Map<String, double>> fetchCoins24HChange() async {
+    Map<String, double> coins24HChangeList = {};
+    NetworkHelper networkHelper = NetworkHelper(
+        '$cmcLatestListingsApiURL?CMC_PRO_API_KEY=$cmcApiKey&convert=$currency&limit=$noOfCoins');
+    var coinData = await networkHelper.getData();
+    int i = 0;
+    for (var coin in _coinsName.keys) {
+      coins24HChangeList[coin] = (coinData['data'][i]['quote'][currency]
+              ['percent_change_24h'])
+          .toDouble();
+      i++;
+    }
+
+    return coins24HChangeList;
   }
 
   Future<Map<String, String>> fetchCoinsListings() async {
@@ -86,7 +109,8 @@ class CoinData {
 
   Future<dynamic> fetchCoinsMetaData() async {
     _coinsName = await fetchCoinsListings();
-    _coinsPrice = await fetchCoinPrices();
+    _coinsPrice = await fetchCoinsPrices();
+    _coins24HChange = await fetchCoins24HChange();
     String coinCodeList = '';
     for (var coinName in _coinsName.keys) {
       if (coinName == 'FCT,FCT2') {
