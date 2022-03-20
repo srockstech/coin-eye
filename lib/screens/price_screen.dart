@@ -18,7 +18,6 @@ class _PriceScreenState extends State<PriceScreen>
   String selectedCurrencyCode = 'USD';
   Widget allCoinsTab;
   Widget selectedCurrencyIcon;
-  Widget refreshButton;
   var coinsData;
   CoinData coinData;
   // bool updatePrice = false;
@@ -83,23 +82,6 @@ class _PriceScreenState extends State<PriceScreen>
           selectedCurrencySymbol,
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
         );
-        refreshButton = GestureDetector(
-          onTap: () {
-            setState(() {
-              refreshButton = SpinKitRing(
-                color: Colors.white,
-                size: 20,
-                lineWidth: 2,
-              );
-            });
-            updateUI();
-          },
-          child: Icon(
-            Icons.refresh,
-            size: 25,
-            color: Colors.white,
-          ),
-        );
       });
       await Future.delayed(Duration(seconds: 30));
     }
@@ -119,23 +101,6 @@ class _PriceScreenState extends State<PriceScreen>
     selectedCurrencyIcon = Text(
       selectedCurrencySymbol,
       style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-    );
-    refreshButton = GestureDetector(
-      onTap: () {
-        setState(() {
-          refreshButton = SpinKitRing(
-            color: Colors.white,
-            size: 20,
-            lineWidth: 2,
-          );
-        });
-        updateUI();
-      },
-      child: Icon(
-        Icons.refresh,
-        size: 25,
-        color: Colors.white,
-      ),
     );
     updateUI();
   }
@@ -161,7 +126,6 @@ class _PriceScreenState extends State<PriceScreen>
           ],
         ),
         actions: [
-          refreshButton,
           PopupMenuButton<String>(
             itemBuilder: (BuildContext context) {
               return getPopupMenuItemsList();
