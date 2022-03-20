@@ -93,18 +93,22 @@ class _CoinCardState extends State<CoinCard> {
                   flex: 8,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Color(0xAAE5FBF0),
+                      color: (widget.percent24HChange[0] != '-')
+                          ? Color(0xAAE5FBF0)
+                          : Color(0xFFFEEEEE),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     margin: EdgeInsets.symmetric(horizontal: 12),
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 6),
+                    padding: EdgeInsets.symmetric(vertical: 5),
                     child: Text(
-                      widget.percent24HChange,
+                      '${widget.percent24HChange}%',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xFF43BC7A),
+                        color: (widget.percent24HChange[0] != '-')
+                            ? Color(0xFF43BC7A)
+                            : Color(0xFFF35957),
                       ),
                     ),
                   ),
