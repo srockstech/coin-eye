@@ -36,69 +36,73 @@ class _PriceScreenState extends State<PriceScreen>
   }
 
   void updateUI() async {
-    coinData = CoinData(currency: selectedCurrencyCode);
-    coinsData = await coinData.fetchCoinsMetaData();
-    setState(() {
-      allCoinsTab = Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          FieldBanner(),
-          Flexible(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (listViewContext, index) {
-                var priceInString, coins24HChangeInString;
-                double price = coinData.getCoinsPrice().values.toList()[index];
-                if (price < 1) {
-                  priceInString = price.toStringAsFixed(6);
-                } else {
-                  priceInString = price.toStringAsFixed(2);
-                }
+    for (;;) {
+      coinData = CoinData(currency: selectedCurrencyCode);
+      coinsData = await coinData.fetchCoinsMetaData();
+      setState(() {
+        allCoinsTab = Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            FieldBanner(),
+            Flexible(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (listViewContext, index) {
+                  var priceInString, coins24HChangeInString;
+                  double price =
+                      coinData.getCoinsPrice().values.toList()[index];
+                  if (price < 1) {
+                    priceInString = price.toStringAsFixed(6);
+                  } else {
+                    priceInString = price.toStringAsFixed(2);
+                  }
 
-                double coin24HChange =
-                    coinData.getCoins24Change().values.toList()[index];
-                coins24HChangeInString = coin24HChange.toStringAsFixed(2);
+                  double coin24HChange =
+                      coinData.getCoins24Change().values.toList()[index];
+                  coins24HChangeInString = coin24HChange.toStringAsFixed(2);
 
-                return CoinCard(
-                  coinName: coinData.getCoinsName().values.toList()[index],
-                  coinCode: coinData.getCoinsName().keys.toList()[index],
-                  rate: priceInString,
-                  percent24HChange: coins24HChangeInString,
-                  selectedCurrencyCode: selectedCurrencyCode,
-                  logoUrl: coinsData['data'][coinData
-                      .getCoinsName()
-                      .keys
-                      .toList()[index]
-                      .toUpperCase()][0]['logo'],
-                );
-              },
-              itemCount: coinData.getCoinsName().length,
+                  return CoinCard(
+                    coinName: coinData.getCoinsName().values.toList()[index],
+                    coinCode: coinData.getCoinsName().keys.toList()[index],
+                    rate: priceInString,
+                    percent24HChange: coins24HChangeInString,
+                    selectedCurrencyCode: selectedCurrencyCode,
+                    logoUrl: coinsData['data'][coinData
+                        .getCoinsName()
+                        .keys
+                        .toList()[index]
+                        .toUpperCase()][0]['logo'],
+                  );
+                },
+                itemCount: coinData.getCoinsName().length,
+              ),
             ),
+          ],
+        );
+        selectedCurrencyIcon = Text(
+          selectedCurrencySymbol,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        );
+        refreshButton = GestureDetector(
+          onTap: () {
+            setState(() {
+              refreshButton = SpinKitRing(
+                color: Colors.white,
+                size: 20,
+                lineWidth: 2,
+              );
+            });
+            updateUI();
+          },
+          child: Icon(
+            Icons.refresh,
+            size: 25,
+            color: Colors.white,
           ),
-        ],
-      );
-      selectedCurrencyIcon = Text(
-        selectedCurrencySymbol,
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-      );
-      refreshButton = GestureDetector(
-        onTap: () {
-          setState(() {
-            refreshButton = SpinKitRing(
-              color: Colors.white,
-              size: 20,
-              lineWidth: 2,
-            );
-          });
-          updateUI();
-        },
-        child: Icon(
-          Icons.refresh,
-          size: 25,
-          color: Colors.white,
-        ),
-      );
-    });
+        );
+      });
+      await Future.delayed(Duration(seconds: 30));
+    }
   }
 
   @override
