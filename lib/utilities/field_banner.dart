@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
 
 class FieldBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Column(
       children: [
         Container(
@@ -17,7 +17,10 @@ class FieldBanner extends StatelessWidget {
                   child: Container(
                     child: Text(
                       'COIN NAME',
-                      style: kFieldNameTextStyle,
+                      style: TextStyle(
+                        fontSize: screenHeight * 0.015,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ),
@@ -26,7 +29,10 @@ class FieldBanner extends StatelessWidget {
                   child: Text(
                     'PRICE',
                     textAlign: TextAlign.center,
-                    style: kFieldNameTextStyle,
+                    style: TextStyle(
+                      fontSize: screenHeight * 0.015,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
                 Expanded(
@@ -34,7 +40,10 @@ class FieldBanner extends StatelessWidget {
                   child: Text(
                     '24H CHANGE',
                     textAlign: TextAlign.center,
-                    style: kFieldNameTextStyle,
+                    style: TextStyle(
+                      fontSize: screenHeight * 0.015,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ],
