@@ -113,7 +113,7 @@ class _PriceScreenState extends State<PriceScreen>
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: screenHeight * 0.07,
+        toolbarHeight: screenHeight * 0.1,
         elevation: 7,
         shadowColor: Colors.black,
         backgroundColor: Colors.black,
@@ -152,7 +152,7 @@ class _PriceScreenState extends State<PriceScreen>
           Column(
             children: [
               SizedBox(
-                height: screenHeight * 0.011,
+                height: screenHeight * 0.024,
               ),
               PopupMenuButton<String>(
                 splashRadius: screenHeight * 0.03,
