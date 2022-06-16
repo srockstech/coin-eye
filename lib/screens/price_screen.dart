@@ -36,7 +36,7 @@ class _PriceScreenState extends State<PriceScreen>
   }
 
   void updateUI() async {
-    // for (;;) {
+    /// for (;;) {
     //   coinData = CoinData(currency: selectedCurrencyCode);
     //   coinsData = await coinData.fetchCoinsMetaData();
     //   setState(() {
