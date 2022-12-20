@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'networking.dart';
 
 const Map<String, String> currenciesList = {
@@ -33,7 +34,7 @@ const cmcApiKey = '15e33201-d615-4852-8a10-1523da86bc7e';
 const cmcLatestListingsApiURL =
     'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
 
-const noOfCoins = 500;
+const noOfCoins = 300;
 
 class CoinData {
   final String currency;

@@ -5,6 +5,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../services/coin_data.dart';
+import '../utilities/coin_card.dart';
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -36,68 +37,68 @@ class _PriceScreenState extends State<PriceScreen>
   }
 
   void updateUI() async {
-    /// for (;;)
-    //   coinData = CoinData(currency: selectedCurrencyCode);
-    //   coinsData = await coinData.fetchCoinsMetaData();
-    //   setState(() {
-    //     allCoinsTab = Column(
-    //       children: <Widget>[
-    //         FieldBanner(),
-    //         Expanded(
-    //           child: ListView.builder(
-    //             shrinkWrap: true,
-    //             itemBuilder: (listViewContext, index) {
-    //               var priceInString, coins24HChangeInString;
-    //               double price =
-    //                   coinData.getCoinsPrice().values.toList()[index];
-    //               if (price < 1) {
-    //                 priceInString = price.toStringAsFixed(6);
-    //               } else {
-    //                 priceInString = price.toStringAsFixed(2);
-    //               }
-    //
-    //               double coin24HChange =
-    //                   coinData.getCoins24Change().values.toList()[index];
-    //               coins24HChangeInString = coin24HChange.toStringAsFixed(2);
-    //
-    //               return CoinCard(
-    //                 coinName: coinData.getCoinsName().values.toList()[index],
-    //                 coinCode: coinData.getCoinsName().keys.toList()[index],
-    //                 rate: priceInString,
-    //                 percent24HChange: coins24HChangeInString,
-    //                 selectedCurrencyCode: selectedCurrencyCode,
-    //                 logoUrl: coinsData['data'][coinData
-    //                     .getCoinsName()
-    //                     .keys
-    //                     .toList()[index]
-    //                     .toUpperCase()][0]['logo'],
-    //               );
-    //             },
-    //             itemCount: coinData.getCoinsName().length,
-    //           ),
-    //         ),
-    //       ],
-    //     );
-    //     selectedCurrencyIcon = Text(
-    //       selectedCurrencySymbol,
-    //       style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-    //     );
-    //   });
-    //   await Future.delayed(Duration(seconds: 30));
-    // }
+    for (;;) {
+      coinData = CoinData(currency: selectedCurrencyCode);
+      coinsData = await coinData.fetchCoinsMetaData();
+      setState(() {
+        allCoinsTab = Column(
+          children: <Widget>[
+            FieldBanner(),
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (listViewContext, index) {
+                  var priceInString, coins24HChangeInString;
+                  double price =
+                      coinData.getCoinsPrice().values.toList()[index];
+                  if (price < 1) {
+                    priceInString = price.toStringAsFixed(6);
+                  } else {
+                    priceInString = price.toStringAsFixed(2);
+                  }
+
+                  double coin24HChange =
+                      coinData.getCoins24Change().values.toList()[index];
+                  coins24HChangeInString = coin24HChange.toStringAsFixed(2);
+
+                  return CoinCard(
+                    coinName: coinData.getCoinsName().values.toList()[index],
+                    coinCode: coinData.getCoinsName().keys.toList()[index],
+                    rate: priceInString,
+                    percent24HChange: coins24HChangeInString,
+                    selectedCurrencyCode: selectedCurrencyCode,
+                    logoUrl: coinsData['data'][coinData
+                        .getCoinsName()
+                        .keys
+                        .toList()[index]
+                        .toUpperCase()][0]['logo'],
+                  );
+                },
+                itemCount: coinData.getCoinsName().length,
+              ),
+            ),
+          ],
+        );
+        selectedCurrencyIcon = Text(
+          selectedCurrencySymbol,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        );
+      });
+      await Future.delayed(Duration(seconds: 30));
+    }
   }
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
-    // allCoinsTab = Center(
-    //   child: SpinKitRing(
-    //     color: Colors.black,
-    //     size: 30,
-    //     lineWidth: 4,
-    //   ),
-    // );
+    allCoinsTab = Center(
+      child: SpinKitRing(
+        color: Colors.black,
+        size: 30,
+        lineWidth: 4,
+      ),
+    );
     selectedCurrencyIcon = Text(
       selectedCurrencySymbol,
       style: TextStyle(
@@ -105,7 +106,7 @@ class _PriceScreenState extends State<PriceScreen>
         fontWeight: FontWeight.w500,
       ),
     );
-    // updateUI();
+    updateUI();
   }
 
   @override
@@ -204,12 +205,7 @@ class _PriceScreenState extends State<PriceScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
-          // allCoinsTab,
-          Column(
-            children: [
-              FieldBanner(),
-            ],
-          ),
+          allCoinsTab,
           Center(
             child: Container(
               margin: EdgeInsets.all(50),
