@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "655542102686",
+    "project_id": "coineye-8f825",
+    "storage_bucket": "coineye-8f825.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655542102686:android:12b57bc575c374b948698f",
+        "android_client_info": {
+          "package_name": "co.appbrewery.bitcoin_ticker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655542102686-io1i513jm07trpr7rop7mjvfpp551aa2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk8whiNrvbKuZTx8oa94IHHQelmRMak_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655542102686-io1i513jm07trpr7rop7mjvfpp551aa2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "655542102686-8c8hji1n70jbdscstr7ackaqhtjf2m0a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co.appbrewery.flashChat"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655542102686:android:d2dabbffb54139ef48698f",
+        "android_client_info": {
+          "package_name": "tech.srocks.dyeus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655542102686-io1i513jm07trpr7rop7mjvfpp551aa2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk8whiNrvbKuZTx8oa94IHHQelmRMak_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "655542102686-io1i513jm07trpr7rop7mjvfpp551aa2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "655542102686-8c8hji1n70jbdscstr7ackaqhtjf2m0a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co.appbrewery.flashChat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
