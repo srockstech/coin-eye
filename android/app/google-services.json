@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "655542102686-io1i513jm07trpr7rop7mjvfpp551aa2.apps.googleusercontent.com",
+          "client_id": "655542102686-d8h6u9m4mtmi06b3sp3beh4u7sv4b8uc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.appbrewery.bitcoin_ticker",
+            "certificate_hash": "09edd2b73179e648af11b7249f190315f633d203"
+          }
+        },
+        {
+          "client_id": "655542102686-4rtpskehm5vfcap0p5kkv00fvc2oj2kn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "655542102686-io1i513jm07trpr7rop7mjvfpp551aa2.apps.googleusercontent.com",
+              "client_id": "655542102686-4rtpskehm5vfcap0p5kkv00fvc2oj2kn.apps.googleusercontent.com",
               "client_type": 3
             },
             {
@@ -43,14 +51,14 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:655542102686:android:d2dabbffb54139ef48698f",
+        "mobilesdk_app_id": "1:655542102686:android:8eb074082d3bbe5548698f",
         "android_client_info": {
-          "package_name": "tech.srocks.dyeus"
+          "package_name": "tech.srocks.coineye"
         }
       },
       "oauth_client": [
         {
-          "client_id": "655542102686-io1i513jm07trpr7rop7mjvfpp551aa2.apps.googleusercontent.com",
+          "client_id": "655542102686-4rtpskehm5vfcap0p5kkv00fvc2oj2kn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -63,7 +71,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "655542102686-io1i513jm07trpr7rop7mjvfpp551aa2.apps.googleusercontent.com",
+              "client_id": "655542102686-4rtpskehm5vfcap0p5kkv00fvc2oj2kn.apps.googleusercontent.com",
               "client_type": 3
             },
             {
