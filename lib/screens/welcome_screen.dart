@@ -87,7 +87,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         splashBorderRadius: BorderRadius.all(
                             Radius.circular(screenHeight * 0.1)),
                         indicator: BoxDecoration(
-                          color: kGreen,
+                          color: kCyan,
                           borderRadius: BorderRadius.all(
                               Radius.circular(screenHeight * 0.1)),
                         ),

@@ -52,17 +52,73 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(
               height: screenHeight * 0.05,
             ),
-            Text(
-              'Welcome to App',
-              style: GoogleFonts.lora(
-                textStyle: headingTextStyle,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Welcome to ',
+                  style: GoogleFonts.lora(
+                    textStyle: headingTextStyle,
+                    height: 1,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w600,
+                    fontSize: screenHeight * 0.045,
+                    letterSpacing: -1.5,
+                  ),
+                ),
+                Text(
+                  'coin',
+                  style: TextStyle(
+                    height: 1,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    fontSize: screenHeight * 0.045,
+                    letterSpacing: -1.5,
+                    shadows: <Shadow>[
+                      Shadow(
+                        color: Colors.black54,
+                        offset: Offset(0, 0),
+                        blurRadius: 5,
+                      ),
+                    ],
+                  ),
+                ),
+                Text(
+                  'eye',
+                  style: TextStyle(
+                    height: 1,
+                    color: Color(0xFF2BFFF1),
+                    shadows: <Shadow>[
+                      Shadow(
+                        color: Colors.black54,
+                        offset: Offset(0, 0),
+                        blurRadius: 5,
+                      ),
+                    ],
+                    fontWeight: FontWeight.w900,
+                    fontSize: screenHeight * 0.045,
+                    letterSpacing: -1.5,
+                  ),
+                ),
+                Text(
+                  ' !',
+                  style: GoogleFonts.lora(
+                    textStyle: headingTextStyle,
+                    height: 1,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w600,
+                    fontSize: screenHeight * 0.045,
+                    letterSpacing: -1.5,
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: screenHeight * 0.04,
             ),
             Text(
-              'Please signup with your phone number to get registered',
+              'Please sign up with your phone number',
+              textAlign: TextAlign.center,
               style:
                   TextStyle(color: kFontColor, fontSize: screenHeight * 0.019),
             ),
@@ -118,7 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: screenHeight * 0.04,
             ),
             RoundedButton(
-              color: kGreen,
+              color: kCyan,
               shadowColor: Color.fromRGBO(153, 153, 153, 0.1),
               child: Text(
                 'Continue',
@@ -177,7 +233,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             RoundedButton(
               bordered: true,
-              color: kLightGreen,
+              color: kLightCyan,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -203,7 +259,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             RoundedButton(
               bordered: true,
-              color: kLightGreen,
+              color: kLightCyan,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -263,8 +319,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 GestureDetector(
                   child: Text(
                     ' SignIn',
-                    style:
-                        TextStyle(color: kGreen, fontWeight: FontWeight.bold),
+                    style: TextStyle(color: kCyan, fontWeight: FontWeight.bold),
                   ),
                   onTap: widget.onTap,
                 ),
