@@ -24,7 +24,6 @@ class _PriceScreenState extends State<PriceScreen>
   Widget selectedCurrencyIcon;
   var coinsData;
   CoinData coinData;
-  bool onScreen;
 
   // bool updatePrice = false;
 
@@ -51,7 +50,7 @@ class _PriceScreenState extends State<PriceScreen>
   }
 
   void updateUI() async {
-    for (; onScreen == true;) {
+    for (;;) {
       print('fetching data from api...');
       coinData = CoinData(currency: selectedCurrencyCode);
       coinsData = await coinData.fetchCoinsMetaData();
@@ -121,13 +120,11 @@ class _PriceScreenState extends State<PriceScreen>
         fontWeight: FontWeight.w500,
       ),
     );
-    onScreen = true;
     updateUI();
   }
 
   @override
   void dispose() {
-    onScreen = false;
     super.dispose();
   }
 

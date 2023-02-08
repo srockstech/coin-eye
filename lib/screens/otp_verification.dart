@@ -6,7 +6,6 @@ import 'package:coin_eye/utilities/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 import 'price_screen.dart';
@@ -43,7 +42,7 @@ class _OTPVerificationState extends State<OTPVerification> {
           GestureDetector(
             child: Text(
               'Re-send Code',
-              style: TextStyle(color: kGreen, fontWeight: FontWeight.bold),
+              style: TextStyle(color: kCyan, fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -120,16 +119,55 @@ class _OTPVerificationState extends State<OTPVerification> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        toolbarHeight: screenHeight * 0.07,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+              bottom:
+                  Radius.elliptical(screenHeight * 0.04, screenHeight * 0.02)),
+        ),
+        backgroundColor: Colors.black,
+        leadingWidth: 0,
+        leading: SizedBox(
+          height: 0,
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'coin',
+              style: TextStyle(
+                height: 1,
+                color: Colors.white,
+                fontWeight: FontWeight.w900,
+                fontSize: screenHeight * 0.05,
+                letterSpacing: -1.5,
+                shadows: <Shadow>[
+                  Shadow(
+                    color: Colors.black54,
+                    offset: Offset(0, 0),
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+            ),
+            Text(
+              'eye',
+              style: TextStyle(
+                height: 1,
+                color: Color(0xFF2BFFF1),
+                shadows: <Shadow>[
+                  Shadow(
+                    color: Colors.black54,
+                    offset: Offset(0, 0),
+                    blurRadius: 5,
+                  ),
+                ],
+                fontWeight: FontWeight.w900,
+                fontSize: screenHeight * 0.05,
+                letterSpacing: -1.5,
+              ),
+            ),
+          ],
         ),
       ),
       body: SafeArea(
@@ -139,24 +177,28 @@ class _OTPVerificationState extends State<OTPVerification> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              SizedBox(
+                height: screenHeight * 0.025,
+              ),
               Text(
-                'Enter OTP',
-                style: GoogleFonts.lora(
-                  textStyle: headingTextStyle,
-                ),
+                'Verification',
+                textAlign: TextAlign.center,
+                style: headingTextStyle,
               ),
               SizedBox(
-                height: screenHeight * 0.02,
+                height: screenHeight * 0.05,
               ),
               Text(
                 'A six digit code has been sent to +91 ${widget.phoneNumber}',
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: kFontColor, fontSize: screenHeight * 0.0185),
+                    color: kFontColor, fontSize: screenHeight * 0.019),
               ),
               SizedBox(
                 height: screenHeight * 0.02,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Incorrect number? ',
@@ -167,7 +209,7 @@ class _OTPVerificationState extends State<OTPVerification> {
                     child: Text(
                       ' Change',
                       style:
-                          TextStyle(color: kGreen, fontWeight: FontWeight.bold),
+                          TextStyle(color: kCyan, fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
                       Navigator.pop(context);
@@ -210,8 +252,8 @@ class _OTPVerificationState extends State<OTPVerification> {
               ),
               RoundedButton(
                 color: (resendOTPGap == 0 || buttonText == 'Done')
-                    ? kGreen
-                    : kMidGreen,
+                    ? kCyan
+                    : kMidCyan,
                 shadowColor: (resendOTPGap == 0 || buttonText == 'Done')
                     ? Color.fromRGBO(153, 153, 153, 0.1)
                     : Color.fromRGBO(153, 153, 153, 0),

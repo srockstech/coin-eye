@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBk8whiNrvbKuZTx8oa94IHHQelmRMak_M',
-    appId: '1:655542102686:android:12b57bc575c374b948698f',
+    appId: '1:655542102686:android:8eb074082d3bbe5548698f',
     messagingSenderId: '655542102686',
     projectId: 'coineye-8f825',
     storageBucket: 'coineye-8f825.appspot.com',
@@ -59,11 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCiuovuQbQ6huvtZpB3RWKyLqx5yaHaxzQ',
-    appId: '1:655542102686:ios:6704deec4a9ae45748698f',
+    appId: '1:655542102686:ios:39198eeb07237a7848698f',
     messagingSenderId: '655542102686',
     projectId: 'coineye-8f825',
     storageBucket: 'coineye-8f825.appspot.com',
-    iosClientId: '655542102686-s430o49ah86gb10o5s4s63q0b142t148.apps.googleusercontent.com',
-    iosBundleId: 'co.appbrewery.bitcoinTicker',
+    androidClientId: '655542102686-d8h6u9m4mtmi06b3sp3beh4u7sv4b8uc.apps.googleusercontent.com',
+    iosClientId: '655542102686-d7703mjmn6r8cp0rc4pg939snt7lam1r.apps.googleusercontent.com',
+    iosBundleId: 'tech.srocks.coineye',
   );
 }

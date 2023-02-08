@@ -3,7 +3,6 @@ import 'package:coin_eye/utilities/input_text_field.dart';
 import 'package:coin_eye/utilities/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'otp_verification.dart';
 
@@ -34,81 +33,16 @@ class _SignInScreenState extends State<SignInScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             SizedBox(
-              height: screenHeight * 0.05,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Welcome to ',
-                  style: GoogleFonts.lora(
-                    textStyle: headingTextStyle,
-                    height: 1,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w600,
-                    fontSize: screenHeight * 0.045,
-                    letterSpacing: -1.5,
-                  ),
-                ),
-                Text(
-                  'coin',
-                  style: TextStyle(
-                    height: 1,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: screenHeight * 0.045,
-                    letterSpacing: -1.5,
-                    shadows: <Shadow>[
-                      Shadow(
-                        color: Colors.black54,
-                        offset: Offset(0, 0),
-                        blurRadius: 5,
-                      ),
-                    ],
-                  ),
-                ),
-                Text(
-                  'eye',
-                  style: TextStyle(
-                    height: 1,
-                    color: Color(0xFF2BFFF1),
-                    shadows: <Shadow>[
-                      Shadow(
-                        color: Colors.black54,
-                        offset: Offset(0, 0),
-                        blurRadius: 5,
-                      ),
-                    ],
-                    fontWeight: FontWeight.w900,
-                    fontSize: screenHeight * 0.045,
-                    letterSpacing: -1.5,
-                  ),
-                ),
-                Text(
-                  ' !',
-                  style: GoogleFonts.lora(
-                    textStyle: headingTextStyle,
-                    height: 1,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w600,
-                    fontSize: screenHeight * 0.045,
-                    letterSpacing: -1.5,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: screenHeight * 0.04,
+              height: screenHeight * 0.07,
             ),
             Text(
               'Please sign in with your phone number',
               textAlign: TextAlign.center,
-              style:
-                  TextStyle(color: kFontColor, fontSize: screenHeight * 0.019),
+              style: TextStyle(fontSize: screenHeight * 0.021),
             ),
             SizedBox(
               height: screenHeight * 0.02,
@@ -226,32 +160,6 @@ class _SignInScreenState extends State<SignInScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'images/metamask_logo.png',
-                    width: screenHeight * 0.027,
-                  ),
-                  Text(
-                    '  Connect to',
-                    style: TextStyle(color: kFontColor),
-                  ),
-                  Text(
-                    ' Metamask',
-                    style: TextStyle(
-                        color: kFontColor, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              onPressed: () {},
-            ),
-            SizedBox(
-              height: screenHeight * 0.01,
-            ),
-            RoundedButton(
-              bordered: true,
-              color: kLightCyan,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
                     'images/google_logo.png',
                     width: screenHeight * 0.025,
                   ),
@@ -294,15 +202,15 @@ class _SignInScreenState extends State<SignInScreen> {
               onPressed: () {},
             ),
             SizedBox(
-              height: screenHeight * 0.025,
+              height: screenHeight * 0.035,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Don’t have an account?',
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, color: kFontColor),
+                  style: TextStyle(
+                      color: kFontColor, fontSize: screenHeight * 0.017),
                 ),
                 GestureDetector(
                   child: Text(

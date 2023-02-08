@@ -102,7 +102,7 @@ class CoinData {
     NetworkHelper networkHelper = NetworkHelper(
         '$cmcLatestListingsApiURL?CMC_PRO_API_KEY=$cmcApiKey&convert=$currency&limit=$noOfCoins');
     var coinData = await networkHelper.getData();
-    for (int i = 0; i < 500; i++) {
+    for (int i = 0; i < 300; i++) {
       coins[coinData['data'][i]['symbol']] = coinData['data'][i]['name'];
     }
     return coins;
