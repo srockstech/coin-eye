@@ -20,6 +20,8 @@ dependencies:
   firebase_core: ^2.4.1
   fluttertoast: ^8.0.9
   sms_autofill: ^2.2.0
+  provider: ^6.0.5
+  google_sign_in: ^6.0.2
 
 
 dev_dependencies:

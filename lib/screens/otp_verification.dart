@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:coin_eye/services/firebase_auth_methods.dart';
+import 'package:coin_eye/services/firebase_phone_auth.dart';
 import 'package:coin_eye/utilities/constants.dart';
 import 'package:coin_eye/utilities/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 import 'price_screen.dart';
@@ -24,9 +23,24 @@ class _OTPVerificationState extends State<OTPVerification> {
   String otp = '';
   String buttonText;
   TextEditingController otpController;
-  FirebaseAuthMethods firebaseAuthMethod;
+  FirebasePhoneAuth firebasePhoneAuth;
   FirebaseAuth _auth = FirebaseAuth.instance;
   UserCredential userCredential;
+
+  @override
+  void initState() {
+    buttonText = 'Resend OTP';
+    otpController = TextEditingController();
+    startResendOTPTimer();
+    triggerFirebaseAuthVerification();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    otpController.dispose();
+    super.dispose();
+  }
 
   Widget bottomHelperOptions(screenHeight) {
     if (buttonText == 'Done') {
@@ -66,9 +80,8 @@ class _OTPVerificationState extends State<OTPVerification> {
   }
 
   void triggerFirebaseAuthVerification() async {
-    //todo: Make it future and await in case of error
     await Future.sync(() {
-      firebaseAuthMethod = FirebaseAuthMethods(
+      firebasePhoneAuth = FirebasePhoneAuth(
         context: context,
         otpController: otpController,
         otpCode: (value) {
@@ -78,11 +91,10 @@ class _OTPVerificationState extends State<OTPVerification> {
         },
       );
     });
-    userCredential = await firebaseAuthMethod.phoneSignIn(widget.phoneNumber);
+    userCredential = await firebasePhoneAuth.phoneSignIn(widget.phoneNumber);
     int flag = 1; //So that it listens only once for one call of this function
     _auth.authStateChanges().listen((user) {
       if (user != null && flag == 1) {
-        Fluttertoast.showToast(msg: 'Verification Successful!');
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -92,21 +104,6 @@ class _OTPVerificationState extends State<OTPVerification> {
         flag = 0;
       }
     });
-  }
-
-  @override
-  void initState() {
-    buttonText = 'Resend OTP';
-    otpController = TextEditingController();
-    startResendOTPTimer();
-    triggerFirebaseAuthVerification();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    otpController.dispose();
-    super.dispose();
   }
 
   @override

@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
-class FirebaseAuthMethods {
+class FirebasePhoneAuth {
   FirebaseAuth _auth = FirebaseAuth.instance;
   final BuildContext context;
   static String codeVerificationId;
@@ -11,7 +10,7 @@ class FirebaseAuthMethods {
 
   Function(String) otpCode;
 
-  FirebaseAuthMethods({
+  FirebasePhoneAuth({
     @required this.context,
     @required this.otpController,
     this.otpCode,
@@ -30,16 +29,15 @@ class FirebaseAuthMethods {
               otp = credential.smsCode;
               otpCode = (otp) {};
             } else {
-              Fluttertoast.showToast(msg: 'Signed Out');
+              print('User Logged Out');
             }
           });
         } catch (e) {
-          Fluttertoast.showToast(msg: e);
+          print(e.toString());
         }
       },
       verificationFailed: (e) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(e.message)));
+        print(e.toString());
       },
       codeSent: (verificationId, resendToken) async {
         PhoneAuthCredential credential;
@@ -51,12 +49,12 @@ class FirebaseAuthMethods {
                 smsCode: otpController.text.trim(),
               );
             } catch (e) {
-              Fluttertoast.showToast(msg: e.toString());
+              print(e.toString());
             }
             try {
               await _auth.signInWithCredential(credential);
             } catch (e) {
-              Fluttertoast.showToast(msg: e.toString());
+              print(e.toString());
             }
           }
         });
@@ -66,7 +64,10 @@ class FirebaseAuthMethods {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                  'Unable to automatically read the code. Please enter it manually.'),
+                  'Unable to automatically read the code. Please enter it manually.',
+                  style: TextStyle(color: Colors.red)),
+              backgroundColor: Colors.black,
+              duration: Duration(seconds: 5),
             ),
           );
         }

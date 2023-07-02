@@ -29,7 +29,7 @@ const Map<String, String> currenciesList = {
 
 const cmcMetaDataApiURL =
     'https://pro-api.coinmarketcap.com/v2/cryptocurrency/info';
-const cmcApiKey = '15e33201-d615-4852-8a10-1523da86bc7e';
+const cmcApiKey = '4cf8283f-ed3b-495b-8721-c1e3c19976cc';
 
 const cmcLatestListingsApiURL =
     'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
@@ -102,7 +102,7 @@ class CoinData {
     NetworkHelper networkHelper = NetworkHelper(
         '$cmcLatestListingsApiURL?CMC_PRO_API_KEY=$cmcApiKey&convert=$currency&limit=$noOfCoins');
     var coinData = await networkHelper.getData();
-    for (int i = 0; i < 300; i++) {
+    for (int i = 0; i < noOfCoins; i++) {
       coins[coinData['data'][i]['symbol']] = coinData['data'][i]['name'];
     }
     return coins;

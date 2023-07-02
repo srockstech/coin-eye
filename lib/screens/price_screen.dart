@@ -24,6 +24,7 @@ class _PriceScreenState extends State<PriceScreen>
   Widget selectedCurrencyIcon;
   var coinsData;
   CoinData coinData;
+  bool disposed;
 
   // bool updatePrice = false;
 
@@ -50,60 +51,83 @@ class _PriceScreenState extends State<PriceScreen>
   }
 
   void updateUI() async {
-    for (;;) {
+    for (; disposed == false;) {
       print('fetching data from api...');
       coinData = CoinData(currency: selectedCurrencyCode);
       coinsData = await coinData.fetchCoinsMetaData();
-      setState(() {
-        allCoinsTab = Column(
-          children: <Widget>[
-            FieldBanner(),
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemBuilder: (listViewContext, index) {
-                  var priceInString, coins24HChangeInString;
-                  double price =
-                      coinData.getCoinsPrice().values.toList()[index];
-                  if (price < 1) {
-                    priceInString = price.toStringAsFixed(6);
-                  } else {
-                    priceInString = price.toStringAsFixed(2);
-                  }
+      if (coinData != null) {
+        setState(() {
+          allCoinsTab = Column(
+            children: <Widget>[
+              FieldBanner(),
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (listViewContext, index) {
+                    try {
+                      var priceInString, coins24HChangeInString;
+                      double price =
+                          coinData.getCoinsPrice().values.toList()[index];
 
-                  double coin24HChange =
-                      coinData.getCoins24Change().values.toList()[index];
-                  coins24HChangeInString = coin24HChange.toStringAsFixed(2);
+                      if (price < 1) {
+                        priceInString = price.toStringAsFixed(6);
+                      } else {
+                        priceInString = price.toStringAsFixed(2);
+                      }
+                      double coin24HChange =
+                          coinData.getCoins24Change().values.toList()[index];
 
-                  return CoinCard(
-                    coinName: coinData.getCoinsName().values.toList()[index],
-                    coinCode: coinData.getCoinsName().keys.toList()[index],
-                    rate: priceInString,
-                    percent24HChange: coins24HChangeInString,
-                    selectedCurrencyCode: selectedCurrencyCode,
-                    logoUrl: coinsData['data'][coinData
-                        .getCoinsName()
-                        .keys
-                        .toList()[index]
-                        .toUpperCase()][0]['logo'],
-                  );
-                },
-                itemCount: coinData.getCoinsName().length,
+                      coins24HChangeInString = coin24HChange.toStringAsFixed(2);
+
+                      String logoUrl = coinsData['data'][coinData
+                          .getCoinsName()
+                          .keys
+                          .toList()[index]
+                          .toUpperCase()][0]['logo'];
+
+                      String coinName;
+                      coinName = coinData.getCoinsName().values.toList()[index];
+
+                      String coinCode;
+                      coinCode = coinData.getCoinsName().keys.toList()[index];
+
+                      return CoinCard(
+                        coinName: coinName,
+                        coinCode: coinCode,
+                        rate: priceInString,
+                        percent24HChange: coins24HChangeInString,
+                        selectedCurrencyCode: selectedCurrencyCode,
+                        logoUrl: logoUrl,
+                      );
+                    } catch (e) {
+                      return Center(
+                        child: SpinKitThreeBounce(
+                          color: Colors.grey[200],
+                          size: 30,
+                        ),
+                      );
+                    }
+                  },
+                  itemCount: coinData.getCoinsName().length,
+                ),
               ),
-            ),
-          ],
-        );
-        selectedCurrencyIcon = Text(
-          selectedCurrencySymbol,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-        );
-      });
-      await Future.delayed(Duration(seconds: 30));
+            ],
+          );
+
+          selectedCurrencyIcon = Text(
+            selectedCurrencySymbol,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          );
+        });
+
+        await Future.delayed(Duration(seconds: 30));
+      }
     }
   }
 
   @override
   void initState() {
+    disposed = false;
     super.initState();
     _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
     allCoinsTab = Center(
@@ -125,6 +149,7 @@ class _PriceScreenState extends State<PriceScreen>
 
   @override
   void dispose() {
+    disposed = true;
     super.dispose();
   }
 
