@@ -3,8 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
+import 'package:coin_eye/services/firebase_google_auth.dart';
+
+import 'package:coin_eye/screens/price_screen.dart';
+
 import 'firebase_options.dart';
-import 'screens/price_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,17 +33,20 @@ class _MyAppState extends State<MyApp> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(
-        primaryColor: Colors.black,
-        scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          secondary: Color(0xFF2BFFF1), // Your accent color
+    return ChangeNotifierProvider(
+      create: (context) => FirebaseGoogleAuth(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.light().copyWith(
+          primaryColor: Colors.black,
+          scaffoldBackgroundColor: Colors.white,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            secondary: Color(0xFF2BFFF1), // Your accent color
+          ),
+          // androidOverscrollIndicator: AndroidOverscrollIndicator.glow,
         ),
-        // androidOverscrollIndicator: AndroidOverscrollIndicator.glow,
+        home: (_auth.currentUser == null) ? WelcomeScreen() : PriceScreen(),
       ),
-      home: (_auth.currentUser == null) ? WelcomeScreen() : PriceScreen(),
     );
   }
 }

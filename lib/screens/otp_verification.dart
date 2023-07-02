@@ -91,7 +91,7 @@ class _OTPVerificationState extends State<OTPVerification> {
         },
       );
     });
-    userCredential = await firebasePhoneAuth.phoneSignIn(widget.phoneNumber);
+    await firebasePhoneAuth.phoneSignIn(widget.phoneNumber);
     int flag = 1; //So that it listens only once for one call of this function
     _auth.authStateChanges().listen((user) {
       if (user != null && flag == 1) {
