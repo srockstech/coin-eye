@@ -4,11 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
 import 'package:coin_eye/services/firebase_google_auth.dart';
-
 import 'package:coin_eye/screens/price_screen.dart';
-
 import 'firebase_options.dart';
 
 void main() async {
@@ -38,7 +35,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData.light().copyWith(
-          primaryColor: Colors.black,
+          primaryColor: Colors.white,
           scaffoldBackgroundColor: Colors.white,
           colorScheme: ColorScheme.fromSwatch().copyWith(
             secondary: Color(0xFF2BFFF1), // Your accent color

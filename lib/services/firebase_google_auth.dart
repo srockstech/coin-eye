@@ -16,12 +16,11 @@ class FirebaseGoogleAuth extends ChangeNotifier {
 
   Future signIn() async {
     try {
-      print("Hello");
       final googleUser = await googleSignIn
           .signIn(); //triggering the pop up of google authentication and storing the chosen account
       if (googleUser == null)
         return; //if no account was chosen, terminate the function
-      print("Bye");
+
       _user =
           googleUser; //if an account was chosen, storing it to the '_user' variable
 

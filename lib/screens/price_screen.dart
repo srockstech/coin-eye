@@ -1,4 +1,5 @@
 import 'package:coin_eye/screens/welcome_screen.dart';
+import 'package:coin_eye/utilities/bottom_navigation_menu.dart';
 import 'package:coin_eye/utilities/field_banner.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,6 +26,7 @@ class _PriceScreenState extends State<PriceScreen>
   var coinsData;
   CoinData coinData;
   bool disposed;
+  int selectedIndex = 0;
 
   // bool updatePrice = false;
 
@@ -140,6 +142,7 @@ class _PriceScreenState extends State<PriceScreen>
     selectedCurrencyIcon = Text(
       selectedCurrencySymbol,
       style: TextStyle(
+        color: Colors.black,
         fontSize: 23,
         fontWeight: FontWeight.w500,
       ),
@@ -156,46 +159,59 @@ class _PriceScreenState extends State<PriceScreen>
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: () async {
         await SystemNavigator.pop();
         return false;
       },
       child: Scaffold(
+        backgroundColor: Colors.white,
+        bottomNavigationBar: BottomNavigationMenu(
+          screenWidth: screenWidth,
+          selectedIndex: selectedIndex,
+          onTap: (index) {
+            if (index != selectedIndex) {
+              setState(() {
+                selectedIndex = index;
+              });
+            }
+          },
+        ),
         appBar: AppBar(
           toolbarHeight: screenHeight * 0.1,
-          elevation: 7,
-          shadowColor: Colors.black,
-          backgroundColor: Colors.black,
+          elevation: 5,
+          shadowColor: Colors.grey[100],
+          backgroundColor: Colors.white,
           title: Row(
             children: [
               Text(
-                'coin',
+                'Coins',
                 style: TextStyle(
                   height: 1,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
                   fontSize: screenHeight * 0.038,
                   letterSpacing: -1.5,
                 ),
               ),
-              Text(
-                'eye',
-                style: TextStyle(
-                  height: 1,
-                  color: Color(0xFF2BFFF1),
-                  shadows: <Shadow>[
-                    Shadow(
-                      color: Color(0xFF2BFFF1),
-                      offset: Offset(0, 0),
-                      blurRadius: 5,
-                    ),
-                  ],
-                  fontWeight: FontWeight.w900,
-                  fontSize: screenHeight * 0.038,
-                  letterSpacing: -1.5,
-                ),
-              ),
+              // Text(
+              //   'eye',
+              //   style: TextStyle(
+              //     height: 1,
+              //     color: Color(0xFF2BFFF1),
+              //     // shadows: <Shadow>[
+              //     //   Shadow(
+              //     //     color: Color(0xFF2BFFF1),
+              //     //     offset: Offset(0, 0),
+              //     //     blurRadius: 5,
+              //     //   ),
+              //     // ],
+              //     fontWeight: FontWeight.w900,
+              //     fontSize: screenHeight * 0.038,
+              //     letterSpacing: -1.5,
+              //   ),
+              // ),
             ],
           ),
           leadingWidth: 0,
@@ -249,6 +265,7 @@ class _PriceScreenState extends State<PriceScreen>
                   },
                   icon: Icon(
                     Icons.more_vert,
+                    color: Colors.black,
                   ),
                 ),
               ],
@@ -261,19 +278,20 @@ class _PriceScreenState extends State<PriceScreen>
             overlayColor: MaterialStateProperty.all(Colors.transparent),
             indicatorColor: Color(0xFF2BFFF1),
             controller: _tabController,
+            unselectedLabelColor: Colors.grey,
             tabs: [
               Tab(
                 child: Text(
                   'All Coins',
                   style: TextStyle(
-                      color: Colors.white, fontSize: screenHeight * 0.018),
+                      color: Colors.black, fontSize: screenHeight * 0.018),
                 ),
               ),
               Tab(
                 child: Text(
                   'My Watchlist',
                   style: TextStyle(
-                      color: Colors.white, fontSize: screenHeight * 0.018),
+                      color: Colors.black, fontSize: screenHeight * 0.018),
                 ),
               ),
             ],

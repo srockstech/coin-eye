@@ -22,6 +22,8 @@ dependencies:
   sms_autofill: ^2.2.0
   provider: ^6.0.5
   google_sign_in: ^6.0.2
+  font_awesome_flutter: ^10.4.0
+  
 
 
 dev_dependencies:
