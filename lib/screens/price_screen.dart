@@ -26,7 +26,7 @@ class _PriceScreenState extends State<PriceScreen>
   var coinsData;
   CoinData coinData;
   bool disposed;
-  int selectedIndex = 0;
+  int selectedIndex = 2;
 
   // bool updatePrice = false;
 
@@ -180,77 +180,36 @@ class _PriceScreenState extends State<PriceScreen>
         ),
         appBar: AppBar(
           toolbarHeight: screenHeight * 0.1,
-          elevation: 5,
+          elevation: 7,
           shadowColor: Colors.grey[100],
-          backgroundColor: Colors.white,
-          title: Row(
+          backgroundColor: Colors.black,
+          titleSpacing: 0,
+          title: Column(
             children: [
               Text(
-                'Coins',
+                'Market',
                 style: TextStyle(
-                  height: 1,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: screenHeight * 0.038,
-                  letterSpacing: -1.5,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w300,
+                  fontSize: screenHeight * 0.03,
                 ),
               ),
-              // Text(
-              //   'eye',
-              //   style: TextStyle(
-              //     height: 1,
-              //     color: Color(0xFF2BFFF1),
-              //     // shadows: <Shadow>[
-              //     //   Shadow(
-              //     //     color: Color(0xFF2BFFF1),
-              //     //     offset: Offset(0, 0),
-              //     //     blurRadius: 5,
-              //     //   ),
-              //     // ],
-              //     fontWeight: FontWeight.w900,
-              //     fontSize: screenHeight * 0.038,
-              //     letterSpacing: -1.5,
-              //   ),
-              // ),
             ],
           ),
-          leadingWidth: 0,
-          leading: SizedBox(
-            width: 0,
-          ),
-          actions: [
-            Column(
-              children: [
-                SizedBox(
-                  height: screenHeight * 0.024,
+          leadingWidth: screenWidth * 0.2,
+          leading: Column(
+            children: [
+              SizedBox(
+                height: screenHeight * 0.024,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(6),
                 ),
-                PopupMenuButton<String>(
-                  splashRadius: screenHeight * 0.03,
-                  itemBuilder: (BuildContext context) {
-                    return getPopupFlatCurrenciesList();
-                  },
-                  onSelected: (key) {
-                    selectedCurrencySymbol = currenciesList[key];
-                    selectedCurrencyCode = key;
-                    setState(() {
-                      selectedCurrencyIcon = SpinKitRing(
-                        color: Colors.white,
-                        size: screenHeight * 0.025,
-                        lineWidth: 2,
-                      );
-                    });
-                    updateUI();
-                  },
-                  icon: selectedCurrencyIcon,
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                SizedBox(
-                  height: screenHeight * 0.024,
-                ),
-                PopupMenuButton<String>(
+                width: screenWidth * 0.105,
+                height: screenWidth * 0.105,
+                child: PopupMenuButton<String>(
                   splashRadius: screenHeight * 0.03,
                   itemBuilder: (BuildContext context) {
                     return getPopupMenuItemsList();
@@ -264,9 +223,37 @@ class _PriceScreenState extends State<PriceScreen>
                             builder: (context) => WelcomeScreen()));
                   },
                   icon: Icon(
-                    Icons.more_vert,
+                    Icons.person,
                     color: Colors.black,
                   ),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            Column(
+              children: [
+                SizedBox(
+                  height: screenHeight * 0.02,
+                ),
+                PopupMenuButton<String>(
+                  splashRadius: screenHeight * 0.03,
+                  itemBuilder: (BuildContext context) {
+                    return getPopupFlatCurrenciesList();
+                  },
+                  onSelected: (key) {
+                    selectedCurrencySymbol = currenciesList[key];
+                    selectedCurrencyCode = key;
+                    setState(() {
+                      selectedCurrencyIcon = SpinKitRing(
+                        color: Colors.white,
+                        size: screenHeight * 0.03,
+                        lineWidth: 2,
+                      );
+                    });
+                    updateUI();
+                  },
+                  icon: selectedCurrencyIcon,
                 ),
               ],
             ),
@@ -276,22 +263,27 @@ class _PriceScreenState extends State<PriceScreen>
           ],
           bottom: TabBar(
             overlayColor: MaterialStateProperty.all(Colors.transparent),
-            indicatorColor: Color(0xFF2BFFF1),
+            indicatorColor: Colors.lightBlue,
+            labelColor: Colors.lightBlue,
+            unselectedLabelColor: Colors.white,
             controller: _tabController,
-            unselectedLabelColor: Colors.grey,
             tabs: [
               Tab(
                 child: Text(
                   'All Coins',
                   style: TextStyle(
-                      color: Colors.black, fontSize: screenHeight * 0.018),
+                      fontSize: screenHeight * 0.017,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: 2),
                 ),
               ),
               Tab(
                 child: Text(
                   'My Watchlist',
                   style: TextStyle(
-                      color: Colors.black, fontSize: screenHeight * 0.018),
+                      fontSize: screenHeight * 0.017,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: 2),
                 ),
               ),
             ],

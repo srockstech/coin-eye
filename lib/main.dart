@@ -35,10 +35,10 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData.light().copyWith(
-          primaryColor: Colors.white,
+          primaryColor: Colors.black,
           scaffoldBackgroundColor: Colors.white,
           colorScheme: ColorScheme.fromSwatch().copyWith(
-            secondary: Color(0xFF2BFFF1), // Your accent color
+            secondary: Colors.lightBlue, // Your accent color
           ),
           // androidOverscrollIndicator: AndroidOverscrollIndicator.glow,
         ),

@@ -23,6 +23,7 @@ dependencies:
   provider: ^6.0.5
   google_sign_in: ^6.0.2
   font_awesome_flutter: ^10.4.0
+  gradient_app_bar: ^0.1.3
   
 
 

@@ -15,26 +15,46 @@ class BottomNavigationMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       backgroundColor: Colors.white,
-      selectedItemColor: Colors.black,
+      selectedItemColor: Colors.blue[600],
       unselectedItemColor: Colors.grey,
       type: BottomNavigationBarType.fixed,
       iconSize: screenWidth * 0.07,
-      selectedFontSize: screenWidth * 0.025,
-      unselectedFontSize: screenWidth * 0.025,
+      selectedFontSize: screenWidth * 0.027,
+      unselectedFontSize: screenWidth * 0.027,
       currentIndex: selectedIndex,
+      elevation: 15,
       onTap: onTap,
       items: [
         BottomNavigationBarItem(
           icon: Icon(
-            Icons.home,
+            Icons.currency_bitcoin_sharp,
           ),
-          label: 'Home',
+          label: 'Market',
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            Icons.person,
+            Icons.alternate_email_sharp,
           ),
-          label: 'Profile',
+          label: 'Community',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.chrome_reader_mode_sharp,
+            size: screenWidth * 0.11,
+          ),
+          label: 'Learn',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.leaderboard_outlined,
+          ),
+          label: 'Leaderboard',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.wallet_sharp,
+          ),
+          label: 'Wallet',
         ),
       ],
     );
