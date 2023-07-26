@@ -4,8 +4,8 @@ import 'constants.dart';
 
 class InputTextField extends StatelessWidget {
   InputTextField({
-    @required this.screenHeight,
-    @required this.onChanged,
+    required this.screenHeight,
+    required this.onChanged,
     this.prefixIcon,
     this.suffixIcon,
     this.label,
@@ -25,25 +25,25 @@ class InputTextField extends StatelessWidget {
     this.controller,
   });
 
-  final Function onChanged;
+  final Function(String) onChanged;
   final double screenHeight;
-  final Widget prefixIcon;
-  final Widget suffixIcon;
-  final String label;
-  final String hintText;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final String? label;
+  final String? hintText;
   final Color hintTextColor;
   final Color textColor;
   final Color enabledBorderColor;
   final Color focusedBorderColor;
-  final Color cursorColor;
+  final Color? cursorColor;
   final Color fillColor;
   final Color focusColor;
-  final double fontSize;
+  final double? fontSize;
   final bool obscureText;
   final int maxLines;
-  final int minLines;
-  final TextInputType keyboardType;
-  final TextEditingController controller;
+  final int? minLines;
+  final TextInputType? keyboardType;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {

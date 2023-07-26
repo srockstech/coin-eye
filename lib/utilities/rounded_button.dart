@@ -1,19 +1,18 @@
 import 'package:coin_eye/utilities/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class RoundedButton extends StatelessWidget {
   final Color color;
   final Widget child;
-  final Function onPressed;
+  final Function() onPressed;
   final Color shadowColor;
   final bool bordered;
 
   RoundedButton(
       {this.shadowColor = Colors.transparent,
-      @required this.color,
-      @required this.child,
-      @required this.onPressed,
+      required this.color,
+      required this.child,
+      required this.onPressed,
       this.bordered = false});
 
   @override
@@ -34,7 +33,7 @@ class RoundedButton extends StatelessWidget {
         shadowColor: shadowColor,
         elevation: screenHeight * 0.01,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(screenHeight * 0.04)),
+          borderRadius: BorderRadius.all(Radius.circular(screenHeight * 0.02)),
         ),
       ),
       child: child,

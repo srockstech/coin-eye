@@ -19,13 +19,13 @@ class OTPVerification extends StatefulWidget {
 }
 
 class _OTPVerificationState extends State<OTPVerification> {
-  int resendOTPGap;
+  int? resendOTPGap;
   String otp = '';
-  String buttonText;
-  TextEditingController otpController;
-  FirebasePhoneAuth firebasePhoneAuth;
+  String? buttonText;
+  TextEditingController? otpController;
+  FirebasePhoneAuth? firebasePhoneAuth;
   FirebaseAuth _auth = FirebaseAuth.instance;
-  UserCredential userCredential;
+  UserCredential? userCredential;
 
   @override
   void initState() {
@@ -38,11 +38,11 @@ class _OTPVerificationState extends State<OTPVerification> {
 
   @override
   void dispose() {
-    otpController.dispose();
+    otpController!.dispose();
     super.dispose();
   }
 
-  Widget bottomHelperOptions(screenHeight) {
+  Widget? bottomHelperOptions(screenHeight) {
     if (buttonText == 'Done') {
       return Column(
         children: [
@@ -56,7 +56,7 @@ class _OTPVerificationState extends State<OTPVerification> {
           GestureDetector(
             child: Text(
               'Re-send Code',
-              style: TextStyle(color: kCyan, fontWeight: FontWeight.bold),
+              style: TextStyle(color: kBlue, fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -74,7 +74,7 @@ class _OTPVerificationState extends State<OTPVerification> {
         () {},
       );
       setState(() {
-        resendOTPGap--;
+        resendOTPGap = resendOTPGap! - 1;
       });
     }
   }
@@ -91,7 +91,7 @@ class _OTPVerificationState extends State<OTPVerification> {
         },
       );
     });
-    await firebasePhoneAuth.phoneSignIn(widget.phoneNumber);
+    await firebasePhoneAuth!.phoneSignIn(widget.phoneNumber);
     int flag = 1; //So that it listens only once for one call of this function
     _auth.authStateChanges().listen((user) {
       if (user != null && flag == 1) {
@@ -109,19 +109,18 @@ class _OTPVerificationState extends State<OTPVerification> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    TextStyle headingTextStyle = TextStyle(
-        color: kFontColor,
-        fontWeight: FontWeight.bold,
-        fontSize: screenHeight * 0.035);
+    TextStyle headingTextStyle =
+        TextStyle(color: kFontColor, fontSize: screenHeight * 0.03);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        elevation: 4,
         toolbarHeight: screenHeight * 0.07,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-              bottom:
-                  Radius.elliptical(screenHeight * 0.04, screenHeight * 0.02)),
-        ),
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.vertical(
+        //     bottom: Radius.elliptical(screenHeight * 0.9, screenHeight * 0.1),
+        //   ),
+        // ),
         backgroundColor: Colors.black,
         leadingWidth: 0,
         leading: SizedBox(
@@ -135,7 +134,7 @@ class _OTPVerificationState extends State<OTPVerification> {
               style: TextStyle(
                 height: 1,
                 color: Colors.white,
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.w200,
                 fontSize: screenHeight * 0.05,
                 letterSpacing: -1.5,
                 shadows: <Shadow>[
@@ -151,7 +150,7 @@ class _OTPVerificationState extends State<OTPVerification> {
               'eye',
               style: TextStyle(
                 height: 1,
-                color: Color(0xFF2BFFF1),
+                color: kBlue,
                 shadows: <Shadow>[
                   Shadow(
                     color: Colors.black54,
@@ -159,7 +158,7 @@ class _OTPVerificationState extends State<OTPVerification> {
                     blurRadius: 5,
                   ),
                 ],
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.w200,
                 fontSize: screenHeight * 0.05,
                 letterSpacing: -1.5,
               ),
@@ -178,7 +177,7 @@ class _OTPVerificationState extends State<OTPVerification> {
                 height: screenHeight * 0.025,
               ),
               Text(
-                'Verification',
+                'Please verify your phone number',
                 textAlign: TextAlign.center,
                 style: headingTextStyle,
               ),
@@ -189,7 +188,9 @@ class _OTPVerificationState extends State<OTPVerification> {
                 'A six digit code has been sent to +91 ${widget.phoneNumber}',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: kFontColor, fontSize: screenHeight * 0.019),
+                  color: kFontColor,
+                  fontSize: screenHeight * 0.019,
+                ),
               ),
               SizedBox(
                 height: screenHeight * 0.02,
@@ -206,7 +207,7 @@ class _OTPVerificationState extends State<OTPVerification> {
                     child: Text(
                       ' Change',
                       style:
-                          TextStyle(color: kCyan, fontWeight: FontWeight.bold),
+                          TextStyle(color: kBlue, fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
                       Navigator.pop(context);
@@ -229,9 +230,9 @@ class _OTPVerificationState extends State<OTPVerification> {
                 currentCode: otp,
                 onCodeChanged: (code) {
                   setState(() {
-                    otp = code;
+                    otp = code!;
                   });
-                  if (code.length == 6) {
+                  if (code!.length == 6) {
                     FocusScope.of(context).requestFocus(FocusNode());
                     setState(() {
                       buttonText = 'Done';
@@ -249,13 +250,13 @@ class _OTPVerificationState extends State<OTPVerification> {
               ),
               RoundedButton(
                 color: (resendOTPGap == 0 || buttonText == 'Done')
-                    ? kCyan
-                    : kMidCyan,
+                    ? kBlue
+                    : kLightBlue,
                 shadowColor: (resendOTPGap == 0 || buttonText == 'Done')
                     ? Color.fromRGBO(153, 153, 153, 0.1)
                     : Color.fromRGBO(153, 153, 153, 0),
                 child: Text(
-                  buttonText,
+                  buttonText!,
                   style: TextStyle(
                     color: (resendOTPGap == 0 || buttonText == 'Done')
                         ? kFontColor

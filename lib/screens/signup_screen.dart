@@ -10,7 +10,7 @@ import '../services/firebase_google_auth.dart';
 import 'otp_verification.dart';
 
 class SignUpScreen extends StatefulWidget {
-  final Function onTap;
+  final Function()? onTap;
 
   SignUpScreen({@required this.onTap});
 
@@ -19,7 +19,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String phoneNumber;
+  String? phoneNumber;
   bool showSpinner = false;
   bool hiddenPassword = true;
   List<TextInputType> emailTextInputTypes = [
@@ -29,20 +29,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  void showInSnackBar(String value) {
-    _scaffoldKey.currentState
-        .showSnackBar(new SnackBar(content: new Text(value)));
-  }
+  // void showInSnackBar(String value) {
+  //   _scaffoldKey.currentState!.showSnackBar(new SnackBar(content: new Text(value)));
+  // }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    TextStyle headingTextStyle = TextStyle(
-        color: kFontColor,
-        fontWeight: FontWeight.bold,
-        fontSize: screenHeight * 0.035);
+    // TextStyle headingTextStyle = TextStyle(
+    //     color: kFontColor,
+    //     fontWeight: FontWeight.bold,
+    //     fontSize: screenHeight * 0.035);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.025),
       child: Scaffold(
@@ -111,7 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: screenHeight * 0.04,
             ),
             RoundedButton(
-              color: kCyan,
+              color: kBlue,
               shadowColor: Color.fromRGBO(153, 153, 153, 0.1),
               child: Text(
                 'Continue',
@@ -124,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return OTPVerification(phoneNumber);
+                  return OTPVerification(phoneNumber!);
                 }));
               },
             ),
@@ -170,7 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             RoundedButton(
               bordered: true,
-              color: kLightCyan,
+              color: kLightBlue,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -247,7 +246,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 GestureDetector(
                   child: Text(
                     ' SignIn',
-                    style: TextStyle(color: kCyan, fontWeight: FontWeight.bold),
+                    style: TextStyle(color: kBlue, fontWeight: FontWeight.bold),
                   ),
                   onTap: widget.onTap,
                 ),

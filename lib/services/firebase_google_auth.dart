@@ -8,11 +8,11 @@ class FirebaseGoogleAuth extends ChangeNotifier {
   final googleSignIn =
       GoogleSignIn(); //creating an object of GoogleSignIn class
 
-  GoogleSignInAccount
+  GoogleSignInAccount?
       _user; //for storing the user account fetched from google (details like profile image, name, email, etc.)
 
   GoogleSignInAccount get user =>
-      _user; //Getter for accessing the user outside the class
+      _user!; //Getter for accessing the user outside the class
 
   Future signIn() async {
     try {

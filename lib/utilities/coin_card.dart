@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
-import '../services/networking.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CoinCard extends StatefulWidget {
   final String coinName;
@@ -11,15 +9,15 @@ class CoinCard extends StatefulWidget {
   final String percent24HChange;
   final String selectedCurrencyCode;
   final String logoUrl;
-  Color eyeIconColor = Colors.grey[300];
+  Color? eyeIconColor = Colors.grey[300];
 
   CoinCard({
-    @required this.coinName,
-    @required this.coinCode,
-    @required this.rate,
-    @required this.percent24HChange,
-    @required this.selectedCurrencyCode,
-    @required this.logoUrl,
+    required this.coinName,
+    required this.coinCode,
+    required this.rate,
+    required this.percent24HChange,
+    required this.selectedCurrencyCode,
+    required this.logoUrl,
   });
 
   @override

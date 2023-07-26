@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
 import 'networking.dart';
 
 const Map<String, String> currenciesList = {
@@ -50,7 +47,7 @@ class CoinData {
     // eg. 'BTC': '2.4',
   };
 
-  CoinData({@required this.currency});
+  CoinData({required this.currency});
 
   Map<String, String> getCoinsName() {
     return _coinsName;

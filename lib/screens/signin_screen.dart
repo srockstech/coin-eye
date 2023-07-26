@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'otp_verification.dart';
 
 class SignInScreen extends StatefulWidget {
-  final Function onTap;
+  final Function()? onTap;
 
   SignInScreen({@required this.onTap});
 
@@ -19,7 +19,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  String phoneNumber;
+  String? phoneNumber;
   bool showSpinner = false;
   bool hiddenPassword = true;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -27,10 +27,10 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    TextStyle headingTextStyle = TextStyle(
-        color: kFontColor,
-        fontWeight: FontWeight.bold,
-        fontSize: screenHeight * 0.035);
+    // TextStyle headingTextStyle = TextStyle(
+    //     color: kFontColor,
+    //     fontWeight: FontWeight.bold,
+    //     fontSize: screenHeight * 0.035);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.025),
       child: Scaffold(
@@ -99,7 +99,7 @@ class _SignInScreenState extends State<SignInScreen> {
               height: screenHeight * 0.04,
             ),
             RoundedButton(
-              color: kCyan,
+              color: kBlue,
               shadowColor: Color.fromRGBO(153, 153, 153, 0.1),
               child: Text(
                 'Continue',
@@ -112,7 +112,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return OTPVerification(phoneNumber);
+                  return OTPVerification(phoneNumber!);
                 }));
               },
             ),
@@ -158,7 +158,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             RoundedButton(
               bordered: true,
-              color: kLightCyan,
+              color: kLightBlue,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -235,7 +235,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 GestureDetector(
                   child: Text(
                     ' SignUp',
-                    style: TextStyle(color: kCyan, fontWeight: FontWeight.bold),
+                    style: TextStyle(color: kBlue, fontWeight: FontWeight.bold),
                   ),
                   onTap: widget.onTap,
                 ),

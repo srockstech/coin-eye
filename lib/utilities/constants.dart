@@ -24,9 +24,9 @@ const kCoinNameTextStyle = TextStyle(
 
 //Colors:
 const Color kBlack = Color(0xFF000000);
-const Color kCyan = Color(0xFF2BFFF1);
+const Color kBlue = Colors.lightBlue;
 const Color kMidCyan = Color(0x442BFFF1);
-const Color kLightCyan = Color(0x222BFFF1);
+const Color kLightBlue = Color(0x2203A9F4);
 const Color kAppleBlack = Color(0xFF100F0F);
 const Color kGreen = Color(0xFFBFFB62);
 const Color kMidGreen = Color(0xFFEDFFD0);

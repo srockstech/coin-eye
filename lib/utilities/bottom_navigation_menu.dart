@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class BottomNavigationMenu extends StatelessWidget {
-  final double screenWidth;
+  final double? screenWidth;
   final int selectedIndex;
-  final Function(int) onTap;
+  final Function(int)? onTap;
 
   const BottomNavigationMenu({
     this.screenWidth,
-    this.selectedIndex,
+    required this.selectedIndex,
     this.onTap,
   });
 
@@ -18,9 +18,9 @@ class BottomNavigationMenu extends StatelessWidget {
       selectedItemColor: Colors.blue[600],
       unselectedItemColor: Colors.grey,
       type: BottomNavigationBarType.fixed,
-      iconSize: screenWidth * 0.07,
-      selectedFontSize: screenWidth * 0.027,
-      unselectedFontSize: screenWidth * 0.027,
+      iconSize: screenWidth! * 0.07,
+      selectedFontSize: screenWidth! * 0.027,
+      unselectedFontSize: screenWidth! * 0.027,
       currentIndex: selectedIndex,
       elevation: 15,
       onTap: onTap,
@@ -40,7 +40,7 @@ class BottomNavigationMenu extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(
             Icons.chrome_reader_mode_sharp,
-            size: screenWidth * 0.11,
+            size: screenWidth! * 0.11,
           ),
           label: 'Learn',
         ),

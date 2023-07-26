@@ -40,8 +40,8 @@ android {
 
     defaultConfig {
         applicationId "tech.srocks.coineye"
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdkVersion 19
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true

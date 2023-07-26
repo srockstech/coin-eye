@@ -12,7 +12,7 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -22,17 +22,17 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    TextStyle headingTextStyle = TextStyle(
-        color: kFontColor,
-        fontWeight: FontWeight.bold,
-        fontSize: screenHeight * 0.035);
+    // TextStyle headingTextStyle = TextStyle(
+    //     color: kFontColor,
+    //     fontWeight: FontWeight.bold,
+    //     fontSize: screenHeight * 0.035);
     return WillPopScope(
       onWillPop: () async {
         await SystemNavigator.pop();
@@ -41,12 +41,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          elevation: 4,
           toolbarHeight: screenHeight * 0.07,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-                bottom: Radius.elliptical(
-                    screenHeight * 0.04, screenHeight * 0.02)),
-          ),
+          // shape: RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.vertical(
+          //       bottom:
+          //           Radius.elliptical(screenHeight * 0.9, screenHeight * 0.1)),
+          // ),
           leadingWidth: 0,
           leading: SizedBox(
             height: 0,
@@ -60,7 +61,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 style: TextStyle(
                   height: 1,
                   color: Colors.white,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w200,
                   fontSize: screenHeight * 0.05,
                   letterSpacing: -1.5,
                   shadows: <Shadow>[
@@ -76,7 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 'eye',
                 style: TextStyle(
                   height: 1,
-                  color: Color(0xFF2BFFF1),
+                  color: kBlue,
                   shadows: <Shadow>[
                     Shadow(
                       color: Colors.black54,
@@ -84,7 +85,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       blurRadius: 5,
                     ),
                   ],
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w200,
                   fontSize: screenHeight * 0.05,
                   letterSpacing: -1.5,
                 ),
@@ -117,7 +118,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                           ),
                         ],
                         borderRadius: BorderRadius.all(
-                            Radius.circular(screenHeight * 0.1)),
+                            Radius.circular(screenHeight * 0.5)),
                         border: Border.all(
                           color: kBorderColor,
                         ),
@@ -128,11 +129,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         controller: _tabController,
                         splashFactory: NoSplash.splashFactory,
                         splashBorderRadius: BorderRadius.all(
-                            Radius.circular(screenHeight * 0.1)),
+                            Radius.circular(screenHeight * 0.5)),
                         indicator: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.all(
-                              Radius.circular(screenHeight * 0.1)),
+                              Radius.circular(screenHeight * 0.5)),
                         ),
                         overlayColor: MaterialStateProperty.all(Colors.black),
                         labelColor: Colors.white,
@@ -155,12 +156,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     children: [
                       SignInScreen(
                         onTap: () {
-                          _tabController.animateTo(1);
+                          _tabController!.animateTo(1);
                         },
                       ),
                       SignUpScreen(
                         onTap: () {
-                          _tabController.animateTo(0);
+                          _tabController!.animateTo(0);
                         },
                       ),
                     ],
