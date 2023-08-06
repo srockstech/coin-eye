@@ -7,56 +7,36 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:655542102686:android:12b57bc575c374b948698f",
-        "android_client_info": {
-          "package_name": "co.appbrewery.bitcoin_ticker"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "655542102686-d8h6u9m4mtmi06b3sp3beh4u7sv4b8uc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "co.appbrewery.bitcoin_ticker",
-            "certificate_hash": "09edd2b73179e648af11b7249f190315f633d203"
-          }
-        },
-        {
-          "client_id": "655542102686-4rtpskehm5vfcap0p5kkv00fvc2oj2kn.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBk8whiNrvbKuZTx8oa94IHHQelmRMak_M"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "655542102686-4rtpskehm5vfcap0p5kkv00fvc2oj2kn.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "655542102686-8c8hji1n70jbdscstr7ackaqhtjf2m0a.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "co.appbrewery.flashChat"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:655542102686:android:8eb074082d3bbe5548698f",
         "android_client_info": {
           "package_name": "tech.srocks.coineye"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "655542102686-9on7dq3aggb2v4oq74k9akp9a42re070.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.srocks.coineye",
+            "certificate_hash": "09edd2b73179e648af11b7249f190315f633d203"
+          }
+        },
+        {
+          "client_id": "655542102686-npb2l3ti7ibafrl6ekq5ckqu47gfsl5j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.srocks.coineye",
+            "certificate_hash": "f09fda9a274c08ba407102042edc1a6a18917344"
+          }
+        },
+        {
+          "client_id": "655542102686-p9ueid191996v39tjk819d0ekrk4752d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.srocks.coineye",
+            "certificate_hash": "3e1b195c38f86f833f5aa58b3f12193dd06c9f19"
+          }
+        },
         {
           "client_id": "655542102686-4rtpskehm5vfcap0p5kkv00fvc2oj2kn.apps.googleusercontent.com",
           "client_type": 3

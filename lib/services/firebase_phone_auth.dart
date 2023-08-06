@@ -19,47 +19,43 @@ class FirebasePhoneAuth {
   Future phoneSignIn(String phoneNumber) async {
     String otp;
     UserCredential userCredential;
+
     await _auth.verifyPhoneNumber(
       phoneNumber: '+91$phoneNumber',
       verificationCompleted: (credential) async {
-        try {
-          await _auth.signInWithCredential(credential);
-          _auth.authStateChanges().listen((user) {
-            if (user != null) {
-              otp = credential.smsCode!;
-              otpCode = (otp) {};
-            } else {
-              print('User Logged Out');
-            }
-          });
-        } catch (e) {
-          print(e.toString());
-        }
+        await _auth.signInWithCredential(credential);
+        _auth.authStateChanges().listen((user) {
+          if (user != null) {
+            otp = credential.smsCode!;
+            otpCode = (otp) {};
+          } else {
+            print('User Logged Out');
+          }
+        });
       },
       verificationFailed: (e) {
-        print(e.toString());
+        ScaffoldMessenger.of(context!).showSnackBar(
+          SnackBar(
+            content: Text(e.code, style: TextStyle(color: Colors.red)),
+            backgroundColor: Colors.black,
+            duration: Duration(seconds: 5),
+          ),
+        );
       },
       codeSent: (verificationId, resendToken) async {
         PhoneAuthCredential credential;
         otpController!.addListener(() async {
           if (otpController!.text.trim().length == 6) {
-            // try {
-              credential = PhoneAuthProvider.credential(
-                verificationId: verificationId,
-                smsCode: otpController!.text.trim(),
-              );
-            // } catch (e) {
-            //   print(e.toString());
-            // }
-            try {
-              await _auth.signInWithCredential(credential);
-            } catch (e) {
-              print(e.toString());
-            }
+            credential = PhoneAuthProvider.credential(
+              verificationId: verificationId,
+              smsCode: otpController!.text.trim(),
+            );
+            await _auth.signInWithCredential(credential);
           }
         });
       },
-      codeAutoRetrievalTimeout: (value) {
+      timeout: const Duration(seconds: 60),
+      codeAutoRetrievalTimeout: (verificationId) {
         if (_auth.currentUser == null) {
           ScaffoldMessenger.of(context!).showSnackBar(
             SnackBar(
